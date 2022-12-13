@@ -1,0 +1,379 @@
+    /* --------------------------------General ----------------------------------------------------*/
+
+    @font-face {
+        src: url(fonts/degulartextblack.otf);
+        font-family: degular;
+    }
+
+    body {
+        margin: 0;
+        font-family: degular;
+        text-align: justify;
+        color: white;
+        background-color: #010d0a;
+    }
+
+    h1 {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 10vw;
+        margin-bottom: 7vh;
+        margin-top: 10vh;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 5vw;
+    }
+
+    h3 {
+        display: block;
+        font-size: 2em;
+    }
+
+    ul {
+        list-style-type: square;
+        text-transform: none;
+    }
+
+    footer {
+        font-size: 1em;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 7em;
+        margin-bottom: 5em;
+        max-width: 70%;
+    }
+
+    button {
+        background-color: black;
+        color: white;
+        width: 30vw;
+        height: 5vw;
+        font-size: 3vw;
+        border-radius: 0.2em;
+        border: 0.1em solid white;
+    }
+
+    button :hover {
+        cursor: pointer;
+    }
+
+    .navbarTop {
+        width: 100%;
+        position: fixed;
+        z-index: 2;
+        top: 0px;
+        overflow: hidden;
+        background-color: rgb(11, 11, 11);
+    }
+
+    .navbarTop a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 1em 5%;
+        text-decoration: none;
+        font-size: 0.9em;
+
+    }
+
+    .navbarTop a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .navbarTop a.active {
+        background-color: rgb(27, 39, 44);
+        color: white;
+    }
+
+    .farbGrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-bottom: 5em;
+        margin-top: 5em;
+        gap: 1em;
+    }
+
+    .farbe {
+        width: 100%;
+        height: 6em;
+        border: 1em;
+        gap: 5%;
+        border: 0.1em solid white;
+    }
+
+    .farbe-1 {
+        background-color: white;
+    }
+
+    .farbe-2 {
+        background-color: black;
+    }
+
+    .farbe-3 {
+        background-color: rgb(27, 39, 44);
+    }
+
+    .farbe-4 {
+        background-color: rgb(242, 150, 252);
+    }
+
+    .logo {
+        max-width: 50%;
+        margin-top: 10em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .logo * {
+        line-height: 0.7em;
+        margin: 0;
+    }
+
+    .rock {
+        font-size: 1.6em;
+        margin-right: 0.05em;
+    }
+
+    .date {
+        font-size: 0.4em;
+        margin-top: 0.5em;
+    }
+
+    .adLink {
+        font-size: 2em;
+        color: white;
+        animation: fadeInSlow 5s;
+    }
+
+    a.adLink:link {
+        color: white;
+    }
+
+    a.adLink:visited {
+        color: white;
+    }
+
+    a.adLink:hover {
+        color: rgb(242, 150, 252);
+    }
+
+    .box {
+        position: relative;
+    }
+
+    .box :hover {
+        cursor: pointer;
+    }
+
+    .box .boxImage {
+        inline-size: 100%;
+        opacity: 0.5;
+    }
+
+    .box:hover .boxImage {
+        transform: scale(1.2, 1.2);
+        transition: all 0.15s ease-in-out;
+        opacity: 1;
+    }
+
+    .title {
+        font-size: 2.5em;
+        text-align: center;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .ticket {
+        font-size: 3vw;
+        top: 45%;
+    }
+
+    .neutralLink {
+        color: white;
+    }
+
+    a.neutralLink:link {
+        color: white;
+    }
+
+    a.neutralLink:visited {
+        color: white;
+    }
+
+    a.neutralLink:hover {
+        color: white;
+    }
+
+    .info {
+        text-align: left;
+        font-size: 4vw;
+        max-width: 80%;
+        margin: auto;
+    }
+
+    .Zeitleiste figure {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2em;
+    }
+
+    .Zeitleiste img {
+        border: 0.2em solid white;
+    }
+
+    .Zeitleiste h3 {
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+
+
+    /* --------------------------------Grids ----------------------------------------------------*/
+
+    .mainGrid {
+        display: grid;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10em;
+        margin-top: 5em;
+        max-width: 80%;
+    }
+
+    .mainGrid img {
+        max-width: 100%;
+    }
+
+    .pageTitle {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        text-align: left;
+        max-width: 100%;
+    }
+
+    .pageTitle img {
+        width: 7vw;
+    }
+
+    .doubleGrid {
+        display: grid;
+        text-align: justify;
+        max-width: 80%;
+        font-size: 0.8em;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 5vw;
+    }
+
+    .doubleGrid img {
+        width: 80vw;
+    }
+
+    .tripleGrid {
+        display: grid;
+        text-align: center;
+        max-width: 100%;
+        margin: 5% 5% 10%;
+        gap: 4em;
+    }
+
+    .centerItem {
+        align-self: center;
+        justify-self: center;
+    }
+
+
+    /* --------------------------------MediaQueries ----------------------------------------------------*/
+
+
+    @media screen and (min-width: 600px) {
+
+        .navbarTop a {
+            font-size: 1.3em;
+        }
+
+        .adLink {
+            font-size: 3em;
+        }
+
+        .tripleGrid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .doubleGrid {
+            grid-template-columns: repeat(2, 1fr);
+            font-size: 2.5vw;
+        }
+
+        .doubleGrid img {
+            width: 30vw;
+        }
+
+        .doubleItem {
+            grid-column: span 2;
+        }
+
+        .ticket {
+            font-size: 1.2vw;
+        }
+
+        .info {
+            font-size: 3vw;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+
+        .tripleGrid {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        .info {
+            font-size: 2vw;
+        }
+    }
+
+
+    /* --------------------------------Animations ----------------------------------------------------*/
+
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInSlow {
+
+        0% {
+            opacity: 0;
+        }
+
+        70% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes zoomOut {
+        0% {
+            transform: scale(10, 10);
+        }
+
+        100% {
+            transform: scale(1, 1);
+        }
+    }
