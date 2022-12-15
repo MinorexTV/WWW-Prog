@@ -5,11 +5,11 @@ import * as controller from "./controller.js";
 
 nunjucks.configure("templates", { autoescape: true, noCache: true });
 
-//const db = new DB("./data/notes.db");
+const db = new DB("./data/roadrockdb.db");
 
 export const handleRequest = async (request) => {
   const ctx = {
-    //data: db,
+    data: db,
     nunjucks: nunjucks,
     request: request,
     params: {},
@@ -38,6 +38,11 @@ export const handleRequest = async (request) => {
     if (url.pathname == "/TheChamgerlains.html") return await controller.thechamgerlains(ctx);
     if (url.pathname == "/tickets.html") return await controller.tickets(ctx);
     if (url.pathname == "/ToddBonzalez.html") return await controller.toddbonzalez(ctx);
+    if(url.pathname.match(/\/artist\/(.*)/)){
+      const matches = url.pathname.match(/\/artist\/(.*)/);
+      ctx.params.id = matches[1];
+      return await controller.artist(ctx);
+    }
 
     return await controller.error404(ctx);
   };
