@@ -124,10 +124,9 @@ export function toddbonzalez(ctx) {
 
 export function artist(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  const artistdataraw = ctx.data.query(`SELECT * FROM artists WHERE artistId = ${ctx.params.id}`);
-  const artistdata = {name: "Hallo", description: "du", picture: "lelek.png"};
-  //const artistdata = artistdataraw.map(artist=>({name: artistdataraw[1],description: artistdataraw[2], picture: artistdataraw[3]}))
-  console.log(artistdataraw[1]);
+  const artistdataraw = ctx.data.queryEntries(`SELECT * FROM artists WHERE artistId = ${ctx.params.id}`);
+  const artistdata = artistdataraw[0];
+  console.log("artistdataraw: ",artistdataraw);
   ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
