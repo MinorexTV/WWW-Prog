@@ -5,16 +5,16 @@
     <meta charset="utf-8" />
     <title>Road Rock - LineUp</title>
     <meta name="lineup" content="width=device-width, initial-scale=1">
-    <link href="Style.css" rel="stylesheet" />
+     <link href="/css/Style.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
     <nav>
         <div class="navbarTop">
-            <a href="index.html">Home</a>
-            <a class=active href="LineUp.html">LineUp</a>
-            <a href="tickets.html">Tickets & Preise</a>
-            <a href="info.html">Info</a>
+            <a href="/">Home</a>
+            <a class=active href="/lineup">LineUp</a>
+            <a href="/tickets">Tickets & Preise</a>
+            <a href="/info">Info</a>
         </div>
     </nav>
 
@@ -28,41 +28,18 @@
 
 
         <ul class="tripleGrid">
-
+            {%for artist in allArtists%}
             <li class="box">
-                <a class="neutralLink" href="SleveMcdichael.html">
-                    <img class="boxImage" src="pictures/band1.jpg" />
-                    <h2 class="title">Sleve McDichael</h2>
+                <a class="neutralLink" href="/artist/{{artist.artistId}}">
+                    <img class="boxImage" src={{artist.picture}} />
+                    <h2 class="title">{{artist.name}}</h2>
                 </a>
             </li>
-            <li class="box">
-                <a class="neutralLink" href="TheChamgerlains.html">
-                    <img class="boxImage" src="pictures/band2.jpg" />
-                    <h2 class="title">The Chamgerlains</h2>
-                </a>
-            </li>
-            <li class="box">
-                <a class="neutralLink" href="OnsonSweeney.html">
-                    <img class="boxImage" src="pictures/band3.jpg" />
-                    <h2 class="title">Onson Sweeney</h2>
-                </a>
-            </li>
-            <li class="box">
-                <a class="neutralLink" href="ShownFurcotte.html">
-                    <img class="boxImage" src="pictures/band4.jpg" />
-                    <h2 class="title">Shown Furcotte</h2>
-                </a>
-            </li>
-            <li class="box">
-                <a class="neutralLink" href="ToddBonzalez.html">
-                    <img class="boxImage" src="pictures/band6.jpg" />
-                    <h2 class="title">The Todd Bonzalez Band</h2>
-                </a>
-            </li>
+            {% endfor %}
             <li class="box">
                 <a class="neutralLink" href="/artist/1">
-                    <img class="boxImage" src="pictures/band5.jpg" />
-                    <h2 class="title">Douroue Douroue</h2>
+                    <img class="boxImage" src="/pictures/band1.jpg">
+                    <h2 class="title">Sleve McDichael</h2>
                 </a>
             </li>
         </ul>
@@ -80,8 +57,8 @@
         </div>
         <div>
             <p>Rechtliches</p>
-            <p><a href="Impressum.html" class="neutralLink">Impressum</a></p>
-            <p><a href="Datenschutzerklärung.html" class="neutralLink">Datenschutz</a></p>
+            <p><a href="/impressum" class="neutralLink">Impressum</a></p>
+            <p><a href="/datenschutzerklärung" class="neutralLink">Datenschutz</a></p>
             <p>AGB</p>
         </div>
 
