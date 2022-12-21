@@ -49,7 +49,7 @@ export const handleRequest = async (request) => {
     const url = new URL(ctx.request.url);
     const method = ctx.request.method;
     console.log(method);
-    if (url.pathname == "/") return await controller.index(ctx);
+    if (url.pathname == "/" || url.pathname == "/index") return await controller.index(ctx);
     if (url.pathname == "/info") return await controller.info(ctx);
     if (url.pathname == "/datenschutzerklärung") return await controller.datenschutzerklärung(ctx);
     if (url.pathname == "/formular") return await controller.formular(ctx);

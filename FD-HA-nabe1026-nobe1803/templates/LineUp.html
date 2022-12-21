@@ -34,6 +34,8 @@
                     <h2 class="title">{{artist.name}}</h2>
                 </a>
             </li>
+            {%else%}
+            <p>empty array</p>
             {% endfor %}
             <li class="box">
                 <a class="neutralLink" href="/artist/1">

@@ -60,7 +60,7 @@ export function kollophon(ctx) {
 
 export function lineup(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  const allArtists = ctx.data.query('SELECT * FROM artists');
+  const allArtists = ctx.data.queryEntries('SELECT * FROM artists');
   console.log("lineup(): artists: ", allArtists);
   ctx.response.body = ctx.nunjucks.render("LineUp.html", allArtists);
   ctx.response.status = 200;
