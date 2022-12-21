@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html>
+{% extends 'layout.html' %}
 
+{%block content%}
 <head>
     <meta charset="utf-8" />
     <title>Road Rock - Home</title>
     <meta name="home" content="width=device-width, initial-scale=1" />
-    <link href="Style.css" rel="stylesheet" />
+    <link href="/css/Style.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
 
     <div class="navbarTop">
-            <a class=active href="/index">Home</a>
+            <a href="/index">Home</a>
             <a href="/lineup">LineUp</a>
             <a href="/tickets">Tickets & Preise</a>
             <a href="/info">Info</a>
@@ -134,5 +134,4 @@
 
     </div>
 </body>
-
-</html>
+{%endblock%}

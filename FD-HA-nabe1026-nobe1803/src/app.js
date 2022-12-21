@@ -51,18 +51,18 @@ export const handleRequest = async (request) => {
     console.log(method);
     if (url.pathname == "/" || url.pathname == "/index") return await controller.index(ctx);
     if (url.pathname == "/info") return await controller.info(ctx);
-    if (url.pathname == "/datenschutzerklärung") return await controller.datenschutzerklärung(ctx);
+    if (url.pathname == "/datenschutz") return await controller.datenschutz(ctx);
     if (url.pathname == "/formular") return await controller.formular(ctx);
     if (url.pathname == "/impressum") return await controller.impressum(ctx);
     if (url.pathname == "/kollophon") return await controller.kollophon(ctx);
     if (url.pathname == "/lineup") return await controller.lineup(ctx);
     if (url.pathname == "/tickets") return await controller.tickets(ctx);
-    if (url.pathname == "/DouroueDouroue.html") return await controller.dourouedouroue(ctx);
-    if (url.pathname == "/OnsonSweeney.html") return await controller.onsonsweeney(ctx);
-    if (url.pathname == "/ShownFurcotte.html") return await controller.shownfurcotte(ctx);
-    if (url.pathname == "/SleveMcdichael.html") return await controller.slevemcdichael(ctx);
-    if (url.pathname == "/TheChamgerlains.html") return await controller.thechamgerlains(ctx);
-    if (url.pathname == "/ToddBonzalez.html") return await controller.toddbonzalez(ctx);
+    if (url.pathname == "/documentation") return await controller.documentation(ctx);
+    if (url.pathname == "/documentation/module") return await controller.d_module(ctx);
+    if (url.pathname == "/documentation/farben") return await controller.d_farben(ctx);
+    if (url.pathname == "/documentation/erklaerung") return await controller.d_erklaerung(ctx);
+    if (url.pathname == "/documentation/zeitleiste") return await controller.d_zeitleiste(ctx);
+
     if(url.pathname.match(/\/artist\/(.*)/)){
       const matches = url.pathname.match(/\/artist\/(.*)/);
       ctx.params.id = matches[1];

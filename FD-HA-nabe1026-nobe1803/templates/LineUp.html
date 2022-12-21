@@ -29,21 +29,12 @@
         <ul class="tripleGrid">
             {%for artist in allArtists%}
             <li class="box">
-                <p>{{artist.artistId}}</p>
                 <a class="neutralLink" href="/artist/{{artist.artistId}}">
                     <img class="boxImage" src={{artist.picture}} />
                     <h2 class="title">{{artist.name}}</h2>
                 </a>
             </li>
-            {%else%}
-            <p>empty array</p>
             {% endfor %}
-            <li class="box">
-                <a class="neutralLink" href="/artist/1">
-                    <img class="boxImage" src="/pictures/band1.jpg">
-                    <h2 class="title">Sleve McDichael</h2>
-                </a>
-            </li>
         </ul>
     </div>
 

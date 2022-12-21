@@ -26,9 +26,9 @@ export function index(ctx) {
   return ctx;
 }
 
-export function datenschutzerklärung(ctx) {
+export function datenschutz(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("Datenschutzerklärung.html", {});
+  ctx.response.body = ctx.nunjucks.render("datenschutzerklärung.html", {});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -62,7 +62,7 @@ export function lineup(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const allArtists = ctx.data.queryEntries('SELECT * FROM artists');
   console.log("lineup(): artists: ", allArtists);
-  ctx.response.body = ctx.nunjucks.render("LineUp.html", allArtists);
+  ctx.response.body = ctx.nunjucks.render("LineUp.html", {allArtists});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -82,6 +82,47 @@ export function artist(ctx) {
   const artistdata = artistdataraw[0];
   console.log("artistdata: ",artistdata);
   ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata});
+  ctx.response.status = 200;
+  ctx.response.headers["content-type"] = "text/html";
+  return ctx;
+}
+
+export function documentation(ctx) {
+  debug("@index. ctx %O", ctx.request.url);
+  ctx.response.body = ctx.nunjucks.render("d_index.html", {});
+  ctx.response.status = 200;
+  ctx.response.headers["content-type"] = "text/html";
+  return ctx;
+}
+
+export function d_module(ctx) {
+  debug("@index. ctx %O", ctx.request.url);
+  ctx.response.body = ctx.nunjucks.render("d_module.html", {});
+  ctx.response.status = 200;
+  ctx.response.headers["content-type"] = "text/html";
+  return ctx;
+}
+
+export function d_farben(ctx) {
+  debug("@index. ctx %O", ctx.request.url);
+  ctx.response.body = ctx.nunjucks.render("d_farben.html", {});
+  ctx.response.status = 200;
+  ctx.response.headers["content-type"] = "text/html";
+  return ctx;
+}
+
+export function d_erklaerung(ctx) {
+  debug("@index. ctx %O", ctx.request.url);
+  ctx.response.body = ctx.nunjucks.render("d_erklärung.html", {});
+  ctx.response.status = 200;
+  ctx.response.headers["content-type"] = "text/html";
+  return ctx;
+}
+
+
+export function d_zeitleiste(ctx) {
+  debug("@index. ctx %O", ctx.request.url);
+  ctx.response.body = ctx.nunjucks.render("d_zeitleiste.html", {});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
