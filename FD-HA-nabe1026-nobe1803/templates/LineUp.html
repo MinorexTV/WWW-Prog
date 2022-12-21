@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>Road Rock - LineUp</title>
     <meta name="lineup" content="width=device-width, initial-scale=1">
-     <link href="/css/Style.css" type="text/css" rel="stylesheet" />
+    <link href="/css/Style.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
@@ -18,8 +18,6 @@
         </div>
     </nav>
 
-
-
     <div class="mainGrid">
         <div class="pageTitle">
             <img class="centerItem" src="pictures/Logo.png" />
@@ -30,6 +28,7 @@
         <ul class="tripleGrid">
             {%for artist in allArtists%}
             <li class="box">
+                <p>{{artist.artistId}}</p>
                 <a class="neutralLink" href="/artist/{{artist.artistId}}">
                     <img class="boxImage" src={{artist.picture}} />
                     <h2 class="title">{{artist.name}}</h2>
@@ -43,9 +42,6 @@
                 </a>
             </li>
         </ul>
-    </div>
-
-
     </div>
 
     <footer>
