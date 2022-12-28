@@ -5,6 +5,11 @@ import * as mediaTypes from "https://deno.land/std@0.151.0/media_types/mod.ts";
 
 import * as controller from "./controller.js";
 
+import * as lineupController from "./lineup-controller.js";
+
+import * as loginController from "./login-controller.js";
+
+
 nunjucks.configure("templates", { autoescape: true, noCache: true });
 
 const db = new DB("./data/roadrockdb.db");
@@ -15,6 +20,7 @@ export const handleRequest = async (request) => {
     data: db,
     nunjucks: nunjucks,
     request: request,
+    state: {},
     params: {},
     response: {
       body: undefined,
@@ -50,19 +56,34 @@ export const handleRequest = async (request) => {
     const method = ctx.request.method;
     console.log(method);
     if (url.pathname == "/" || url.pathname == "/index") return await controller.index(ctx);
+    if (url.pathname == "/login"){
+      if(method == "POST"){
+        return await loginController.submitForm(ctx);
+      }
+      else{
+        return await controller.login(ctx);
+      }
+    }
     if (url.pathname == "/info") return await controller.info(ctx);
     if (url.pathname == "/datenschutz") return await controller.datenschutz(ctx);
     if (url.pathname == "/formular") return await controller.formular(ctx);
     if (url.pathname == "/impressum") return await controller.impressum(ctx);
     if (url.pathname == "/kollophon") return await controller.kollophon(ctx);
     if (url.pathname == "/lineup") return await controller.lineup(ctx);
+    if (url.pathname == "/lineup/add"){
+      if(method == "GET"){
+        return await lineupController.add(ctx);
+      }
+      if(method == "POST"){
+        return await lineupController.submitAdd(ctx);
+      }
+    }
     if (url.pathname == "/tickets") return await controller.tickets(ctx);
     if (url.pathname == "/documentation") return await controller.documentation(ctx);
     if (url.pathname == "/documentation/module") return await controller.d_module(ctx);
     if (url.pathname == "/documentation/farben") return await controller.d_farben(ctx);
     if (url.pathname == "/documentation/erklaerung") return await controller.d_erklaerung(ctx);
     if (url.pathname == "/documentation/zeitleiste") return await controller.d_zeitleiste(ctx);
-
     if(url.pathname.match(/\/artist\/(.*)/)){
       const matches = url.pathname.match(/\/artist\/(.*)/);
       ctx.params.id = matches[1];

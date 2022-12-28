@@ -58,7 +58,7 @@ export function kollophon(ctx) {
   return ctx;
 }
 
-export function lineup(ctx) {
+export async function lineup(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const allArtists = ctx.data.queryEntries('SELECT * FROM artists');
   console.log("lineup(): artists: ", allArtists);
@@ -123,6 +123,14 @@ export function d_erklaerung(ctx) {
 export function d_zeitleiste(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   ctx.response.body = ctx.nunjucks.render("d_zeitleiste.html", {});
+  ctx.response.status = 200;
+  ctx.response.headers["content-type"] = "text/html";
+  return ctx;
+}
+
+export function login(ctx) {
+  debug("@index. ctx %O", ctx.request.url);
+  ctx.response.body = ctx.nunjucks.render("login.html", {});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
