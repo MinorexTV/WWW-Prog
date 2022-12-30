@@ -87,7 +87,12 @@ export const handleRequest = async (request) => {
     if(url.pathname.match(/\/artist\/(.*)/)){
       const matches = url.pathname.match(/\/artist\/(.*)/);
       ctx.params.id = matches[1];
+      if(method=="GET"){
       return await controller.artist(ctx);
+      }
+      if(method=="POST"){
+        return await lineupController.removeArtist(ctx);
+        }
     }
 
     return await controller.error404(ctx);

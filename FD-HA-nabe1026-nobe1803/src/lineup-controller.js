@@ -36,6 +36,12 @@ export async function submitAdd(ctx) {
   
   return ctx;
   }
+  export function removeArtist(ctx) {
+    const sql ='DELETE FROM artists WHERE artistId=$id';
+    ctx.data.query(sql, {$id: ctx.params.id});
+    ctx.redirect = Response.redirect(new URL("/lineup", ctx.request.url));
+    return ctx;
+  }
  function validate(data){
   let errors={};
 
