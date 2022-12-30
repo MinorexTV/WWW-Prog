@@ -37,7 +37,14 @@
             {% endfor %}
         </ul>
     </div>
-
+    <footer>
+    <div class="centerItem">
+      {#<button href="/lineup/add" class="button">Hinzufügen</button>#}
+      <form action="/lineup/add">
+    <input type="submit" value="Hinzufügen" />
+</form>
+    </div>
+  </footer>
 </body>
 
 {%endblock%}

@@ -16,8 +16,11 @@ export async function submitAdd(ctx) {
   const newArtistData = {
     name: artistData.get("artistname"),
     description: artistData.get("text"),
+    time: artistData.get("time"),
+    date: artistData.get("date"),
     picture: "/pictures/band5.jpg"
   };
+  console.log("newArtistData: ",newArtistData);
   const errors = validate(newArtistData);
   if (Object.values(errors).length > 0) {
     ctx.response.body = ctx.nunjucks.render("form.html", {errors: errors, form: newArtistData});
@@ -26,8 +29,8 @@ export async function submitAdd(ctx) {
   }
   else{
     ctx.data.query(`
-    INSERT INTO artists (name, description, picture) 
-    VALUES (:name, :description, :picture);`, newArtistData);
+    INSERT INTO artists (name, description, time, date, picture) 
+    VALUES (:name, :description,:time, :date, :picture);`, newArtistData);
     }
     ctx.redirect = Response.redirect(new URL("/lineup", ctx.request.url));
   
