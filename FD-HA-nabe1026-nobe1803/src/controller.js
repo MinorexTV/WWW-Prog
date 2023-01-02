@@ -80,7 +80,7 @@ export function artist(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const artistdataraw = ctx.data.queryEntries(`SELECT * FROM artists WHERE artistId = ${ctx.params.id}`);
   const artistdata = artistdataraw[0];
-  console.log("artistdata: ",artistdata);
+  //console.log("artistId: ",artistdata.artistId);
   ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";

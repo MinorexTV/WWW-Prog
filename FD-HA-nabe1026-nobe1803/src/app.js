@@ -84,8 +84,8 @@ export const handleRequest = async (request) => {
     if (url.pathname == "/documentation/farben") return await controller.d_farben(ctx);
     if (url.pathname == "/documentation/erklaerung") return await controller.d_erklaerung(ctx);
     if (url.pathname == "/documentation/zeitleiste") return await controller.d_zeitleiste(ctx);
-    if(url.pathname.match(/\/artist\/(.*)/)){
-      const matches = url.pathname.match(/\/artist\/(.*)/);
+    if(url.pathname.match(/\/artist\/([0-9]*)$/)){
+      const matches = url.pathname.match(/\/artist\/([0-9]*)$/);
       ctx.params.id = matches[1];
       if(method=="GET"){
       return await controller.artist(ctx);
@@ -94,6 +94,20 @@ export const handleRequest = async (request) => {
         return await lineupController.removeArtist(ctx);
         }
     }
+
+    if(url.pathname.match(/\/artist\/([0-9]*)\/edit/)){
+      const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
+      ctx.params.id = matches[1];
+      console.log("ctx.params.id: ", ctx.params.id);
+      if(method=="GET"){
+      return await lineupController.edit(ctx);
+      }
+      if(method=="POST"){
+        return await lineupController.submitEdit(ctx);
+    }
+  }
+    
+    
 
     return await controller.error404(ctx);
   };

@@ -37,9 +37,14 @@
     </div>
     <footer>
         <div class="centerItem">
-        {#<button href="/lineup/add" class="button">Hinzufügen</button>#}
         <form action="#" method= "POST">
-        <input type="submit" value="Eintrag Entfernen"/>
+        <input id:"delete" type="submit" value="Eintrag Entfernen"/>
+        </form>
+        </div>
+
+        <div class="centerItem">
+        <form action="/artist/{{artistdata.artistId}}/edit" method="GET">
+        <input id:"change" type="submit" value="Eintrag verändern"/>
         </form>
         </div>
   </footer>
