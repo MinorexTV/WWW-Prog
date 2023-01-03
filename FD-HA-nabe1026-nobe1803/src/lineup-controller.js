@@ -77,6 +77,7 @@ export async function submitAdd(ctx) {
     ctx.redirect = Response.redirect(new URL("/lineup", ctx.request.url));
     return ctx;
   }
+
  function validate(data){
   let errors={};
 

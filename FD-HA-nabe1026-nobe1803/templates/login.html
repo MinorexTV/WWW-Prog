@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-   <meta charset="utf-8" />
+  <meta charset="utf-8" />
   <title>Login</title>
-   <meta name="login" content="width=device-width, initial-scale=1">
-    <link href="/css/Style.css" type="text/css" rel="stylesheet" />
+  <meta name="login" content="width=device-width, initial-scale=1">
+  <link href="/css/Style.css" type="text/css" rel="stylesheet" />
 </head>
+
 <body>
+
+  <div class="navbarTop">
+    <a href="/">Home</a>
+    <a href="/lineup">LineUp</a>
+    <a href="/tickets">Tickets & Preise</a>
+    <a href="/info">Info</a>
+    <a class=active href="/login">Login</a>
+  </div>
+
   <h1>Login</h1>
   <form action="#" method="POST">
     <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name"><br>
+    <input type="text" id="name" name="name" autofocus value="{{form.username}}"><br>
     <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Login">
-  </form> 
+    <input type="password" id="password" name="password" value="{{form.password}}"><br><br>
+    <button type="submit">Login</button>
+  </form>
 </body>
+
 </html>

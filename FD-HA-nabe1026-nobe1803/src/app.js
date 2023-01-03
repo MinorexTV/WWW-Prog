@@ -22,6 +22,7 @@ export const handleRequest = async (request) => {
     request: request,
     state: {},
     params: {},
+    session: {},
     response: {
       body: undefined,
       status: undefined,
@@ -106,8 +107,6 @@ export const handleRequest = async (request) => {
         return await lineupController.submitEdit(ctx);
     }
   }
-    
-    
 
     return await controller.error404(ctx);
   };
