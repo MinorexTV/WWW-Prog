@@ -16,6 +16,11 @@
             <a href="/lineup">LineUp</a>
             <a href="/tickets">Tickets & Preise</a>
             <a class=active href="/info">Info</a>
+            {% if authenticated %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            {% endif %}
         </div>
     </nav>
 

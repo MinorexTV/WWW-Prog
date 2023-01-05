@@ -11,23 +11,28 @@
 
 <body>
     <nav>
-       <div class="navbarTop">
+        <div class="navbarTop">
             <a href="/index">Home</a>
             <a href="/lineup">LineUp</a>
             <a class=active href="/tickets">Tickets & Preise</a>
             <a href="/info">Info</a>
+            {% if authenticated %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            {% endif %}
         </div>
     </nav>
 
     <div class="mainGrid">
         <div class="pageTitle">
             <a href="/tickets" class="neutralLink centerItem">
-                <img src="pictures/pfeil.png" alt="" /> </a>
+                <img class="smallImage" src="pictures/pfeil.png" alt="" /> </a>
             <h2 class="centerItem">Ticket bestellen</h2>
         </div>
 
-        <form class="doubleGrid ticketform" action="http://www.inf.fh-flensburg.de/echo/" method="post"
-            accept-charset="utf-8" enctype="multipart/form-data">
+        <form class="doubleGrid" action="http://www.inf.fh-flensburg.de/echo/" method="post" accept-charset="utf-8"
+            enctype="multipart/form-data">
             <label for="vname">Vorname</label>
             <input name="vorname" type="text" id="vname" required>
 
@@ -42,11 +47,13 @@
                 <label for="1day">Ein-Tages-Ticket</label>
             </div>
             <p class="centerItem">40€</p>
+
             <div class="centerItem">
                 <input type="radio" id="3days" name="ticket_type" value="3days">
                 <label for="3days">Drei-Tages-Ticket</label>
             </div>
             <p class="centerItem">100€</p>
+
             <div class="centerItem">
                 <input type="radio" id="food" name="ticket_type" value="food">
                 <label for="food">Food Pass</label>

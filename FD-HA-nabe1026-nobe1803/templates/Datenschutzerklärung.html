@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {%block content%}
+
 <head>
     <meta charset="utf-8" />
     <title>Road Rock - Home</title>
@@ -11,11 +12,16 @@
 <body>
 
     <div class="navbarTop">
-            <a href="/index">Home</a>
-            <a href="/lineup">LineUp</a>
-            <a href="/tickets">Tickets & Preise</a>
-            <a href="/info">Info</a>
-        </div>
+        <a href="/index">Home</a>
+        <a href="/lineup">LineUp</a>
+        <a href="/tickets">Tickets & Preise</a>
+        <a href="/info">Info</a>
+        {% if authenticated %}
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/login">Login</a>
+        {% endif %}
+    </div>
 
     <h2>Datenschutzerklärung</h2>
 

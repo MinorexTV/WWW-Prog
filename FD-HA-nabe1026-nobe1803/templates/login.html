@@ -16,21 +16,25 @@
     <a href="/tickets">Tickets & Preise</a>
     <a href="/info">Info</a>
     {% if authenticated %}
-    <a href="/logout">Logout</a>
+    <a class=active href="/logout">Logout</a>
     {% else %}
-    <a href="/login">Login</a>
+    <a class=active href="/login">Login</a>
     {% endif %}
-
   </div>
 
-  <h1>Login</h1>
-  <form action="#" method="POST">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" autofocus value="{{form.username}}"><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" value="{{form.password}}"><br><br>
-    <button type="submit">Login</button>
-  </form>
+  <div class="mainGrid">
+    <div class="pageTitle">
+      <img class="centerItem" src="pictures/Logo.png" />
+      <h1>Login</h1>
+    </div>
+    <form class="doubleGrid" action="#" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" autofocus value="{{form.username}}">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" value="{{form.password}}">
+      <button class="centerItem doubleItem positive" type="submit">Login</button>
+    </form>
+  </div>
 </body>
 
 </html>

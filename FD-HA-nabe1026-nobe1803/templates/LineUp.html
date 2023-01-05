@@ -16,6 +16,11 @@
             <a class=active href="/lineup">LineUp</a>
             <a href="/tickets">Tickets & Preise</a>
             <a href="/info">Info</a>
+            {% if authenticated %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            {% endif %}
         </div>
     </nav>
 
@@ -37,14 +42,12 @@
             {% endfor %}
         </ul>
     </div>
-    <footer>
-        <div class="centerItem">
-        {#<button href="/lineup/add" class="button">Hinzufügen</button>#}
+    <div class="centerItem">
+        {#<button href="/lineup/add">Hinzufügen</button>#}
         <form action="/lineup/add">
-        <input type="submit" value="Hinzufügen" />
+            <input type="submit" value="Künstler hinzufügen" />
         </form>
-        </div>
-  </footer>
+    </div>
 </body>
 
 {%endblock%}

@@ -131,6 +131,10 @@
         margin: 0;
     }
 
+    .smallImage {
+        max-width: 20%;
+    }
+
     .rock {
         font-size: 1.6em;
         margin-right: 0.05em;
@@ -214,7 +218,6 @@
         max-width: 80%;
         margin: auto;
     }
-
 
     /* --------------------------------Grids ----------------------------------------------------*/
 

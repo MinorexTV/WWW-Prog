@@ -16,6 +16,11 @@
             <a class=active href="/lineup">LineUp</a>
             <a href="/tickets">Tickets & Preise</a>
             <a href="/info">Info</a>
+            {% if authenticated %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            {% endif %}
         </div>
     </nav>
 
@@ -37,17 +42,17 @@
     </div>
     <footer>
         <div class="centerItem">
-        <form action="#" method= "POST">
-        <input id:"delete" type="submit" value="Eintrag Entfernen"/>
-        </form>
+            <form action="#" method="POST">
+                <input id:"delete" type="submit" value="Eintrag Entfernen" />
+            </form>
         </div>
 
         <div class="centerItem">
-        <form action="/artist/{{artistdata.artistId}}/edit" method="GET">
-        <input id:"change" type="submit" value="Eintrag verändern"/>
-        </form>
+            <form action="/artist/{{artistdata.artistId}}/edit" method="GET">
+                <input id:"change" type="submit" value="Eintrag verändern" />
+            </form>
         </div>
-  </footer>
+    </footer>
 </body>
 
 {%endblock%}
