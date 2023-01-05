@@ -6,11 +6,10 @@ const debug = Debug("app:formController");
 export const isValidText = (text) => text.length >= 2;
 
 //only for testing:
-export const testUsername = "Nat";
-export const testPassword = "natsPasswort";
 export const user = {
-  username: testUsername,
-  password: testPassword
+  username: "Nat",
+  password: "1234",
+  id: "1"
 };
 
 export function add(ctx) {
@@ -29,9 +28,8 @@ export async function submitForm(ctx) {
   if (Object.values(errors).length > 0) {
     console.log(errors);
   } else {
-
-    //const user = await getByUsername(ctx.data, enteredUsername); //change to form.username
-    if ((await passwordIsCorrect(user, enteredPassword)) === true) { //change to form.password
+    //const user = await getByUsername(ctx.data, enteredUsername);
+    if ((await passwordIsCorrect(user, enteredPassword)) === true) {
       user.password_hash = undefined;
       ctx.session.user = user;
       ctx.session.flash = `Du bist als ${user.username} eingeloggt.`;
@@ -39,7 +37,7 @@ export async function submitForm(ctx) {
       ctx.redirect = Response.redirect(new URL("/", ctx.request.url));
     } else {
       errors.login = 'Diese Kombination aus Benutzername und Passwort ist nicht gültig.';
-      // Render form with error
+      console.log(errors);
     }
   }
   return ctx;
@@ -55,7 +53,6 @@ export function getByUsername(database, usernameForm) {
 
 export async function passwordIsCorrect(user, password) {
   const hash_from_DB = await bcrypt.hash(user.password);
-  console.log("Passwort: " + user.password);
   const ok = await bcrypt.compare(password, hash_from_DB);
   if (ok === true) {
     console.log("Password is correct");
@@ -77,13 +74,13 @@ export const isAuthenticated = (ctx) => {
 };
 
 
-function validate(testUsername, testPassword) {
+function validate(username, password) {
   let errors = {};
 
-  if (!isValidText(testUsername)) {
+  if (!isValidText(username)) {
     errors.title = "invalid username";
   }
-  if (!isValidText(testPassword)) {
+  if (!isValidText(password)) {
     errors.text = "invalid password";
   }
   return errors;
