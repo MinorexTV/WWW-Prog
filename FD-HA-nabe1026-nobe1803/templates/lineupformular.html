@@ -8,8 +8,28 @@
     <meta name="lineup" content="width=device-width, initial-scale=1">
     <link href="/css/Style.css" type="text/css" rel="stylesheet" />
 </head>
- <body>
-        <form action="#" method="POST">
+
+<div class="navbarTop">
+    <a href="/">Home</a>
+    <a class=active href="/lineup">LineUp</a>
+    <a href="/tickets">Tickets & Preise</a>
+    <a href="/info">Info</a>
+    {% if authenticated %}
+    <a href="/logout">Logout</a>
+    {% else %}
+    <a href="/login">Login</a>
+    {% endif %}
+</div>
+
+<body>
+    <div class="mainGrid">
+        <div class="pageTitle">
+            <a href="/tickets" class="neutralLink centerItem">
+                <img class="smallImage" src="pictures/pfeil.png" alt="" /> </a>
+            <h2 class="centerItem">Künstlerdaten</h2>
+        </div>
+
+        <form class="doubleGrid" action="#" method="POST">
             <label for="artistname">Künstername</label>
             <div>
                 {% if errors.artistname %}<p class="Form-error">{{errors.artistname}}</p>{% endif %}
@@ -18,19 +38,20 @@
             <label for="date">Datum</label>
             <div>
                 {% if errors.date %}<p class="Form-date">{{errors.date}}</p>{% endif %}
-                <input type="date" id="date" name="date"  value="{{form.date}}">
+                <input type="date" id="date" name="date" value="{{form.date}}">
             </div>
             <label for="time">Zeit</label>
             <div>
                 {% if errors.time %}<p class="Form-time">{{errors.time}}</p>{% endif %}
-                <input type="time" id="time" name="time"  value="{{form.time}}">
+                <input type="time" id="time" name="time" value="{{form.time}}">
             </div>
             <label for="text">Beschreibung</label>
             <div>
                 {% if errors.text %}<p class="Form-error">{{errors.text}}</p>{% endif %}
                 <textarea id="text" name="text" rows="8" cols="20">{{form.description}}</textarea>
             </div>
-            <button type="submit">Speichern</button>
+            <button class="centerItem doubleItem positive" type="submit">Speichern</button>
         </form>
- </body>
+    </div>
+</body>
 {%endblock%}
