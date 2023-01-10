@@ -1,4 +1,5 @@
 import { debug as Debug } from "https://deno.land/x/debug/mod.ts";
+import { contextOrFrameLookup } from "https://deno.land/x/nunjucks@3.2.3/src/runtime.js";
 
 const debug = Debug("app:controller");
 
@@ -20,7 +21,8 @@ export function info(ctx) {
 
 export function index(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("index.html", {});
+  const authenticated = ctx.state.authenticated;
+  ctx.response.body = ctx.nunjucks.render("index.html", {authenticated});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;

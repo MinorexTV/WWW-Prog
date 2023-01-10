@@ -2,11 +2,12 @@ import nunjucks from "https://deno.land/x/nunjucks@3.2.3/mod.js";
 import { DB } from "https://deno.land/x/sqlite/mod.ts";
 import * as path from "https://deno.land/std@0.152.0/path/posix.ts";
 import * as mediaTypes from "https://deno.land/std@0.151.0/media_types/mod.ts";
+import { deleteCookie, setCookie, getCookies } from "https://deno.land/std/http/cookie.ts";
+
+
 
 import * as controller from "./controller.js";
-
 import * as lineupController from "./lineup-controller.js";
-
 import * as loginController from "./login-controller.js";
 
 
@@ -20,6 +21,7 @@ export const handleRequest = async (request) => {
     data: db,
     nunjucks: nunjucks,
     request: request,
+    cookies: {},
     state: {},
     params: {},
     session: {},
@@ -31,7 +33,6 @@ export const handleRequest = async (request) => {
   }
   const base = "assets";
   ctx = await serveStaticFile(base, ctx);
-
   let result = await router(ctx);
 
   // Handle redirect
@@ -48,6 +49,7 @@ export const handleRequest = async (request) => {
   return new Response(result.response.body, {
     status: result.response.status,
     headers: result.response.headers,
+    //alternative: result.response.headers.get(HEADER)
   });
 };
 
@@ -56,7 +58,9 @@ export const handleRequest = async (request) => {
     const url = new URL(ctx.request.url);
     const method = ctx.request.method;
     console.log(method);
-    if (url.pathname == "/" || url.pathname == "/index") return await controller.index(ctx);
+    if (url.pathname == "/" || url.pathname == "/index") {
+      console.log("cookies: " + ctx.cookies);
+      return await controller.index(ctx)}
     if (url.pathname == "/login"){
       if(method == "POST"){
         return await loginController.submitForm(ctx);
@@ -85,7 +89,7 @@ export const handleRequest = async (request) => {
     if (url.pathname == "/documentation/farben") return await controller.d_farben(ctx);
     if (url.pathname == "/documentation/erklaerung") return await controller.d_erklaerung(ctx);
     if (url.pathname == "/documentation/zeitleiste") return await controller.d_zeitleiste(ctx);
-    if(url.pathname.match(/\/artist\/([0-9]*)$/)){
+    if (url.pathname.match(/\/artist\/([0-9]*)$/)){
       const matches = url.pathname.match(/\/artist\/([0-9]*)$/);
       ctx.params.id = matches[1];
       if(method=="GET"){
@@ -96,7 +100,7 @@ export const handleRequest = async (request) => {
         }
     }
 
-    if(url.pathname.match(/\/artist\/([0-9]*)\/edit/)){
+    if (url.pathname.match(/\/artist\/([0-9]*)\/edit/)){
       const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
       ctx.params.id = matches[1];
       console.log("ctx.params.id: ", ctx.params.id);
@@ -110,6 +114,8 @@ export const handleRequest = async (request) => {
 
     return await controller.error404(ctx);
   };
+
+
 
   const serveStaticFile = async (base, ctx) => {
     const url = new URL(ctx.request.url);
