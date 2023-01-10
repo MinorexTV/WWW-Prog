@@ -22,7 +22,7 @@ export function info(ctx) {
 
 export function index(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  const auth = ctx.state.authenticated;
+  const auth = ctx.session.userId;
   ctx.response.body = ctx.nunjucks.render("index.html", {authenticated : auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
@@ -64,7 +64,7 @@ export function kollophon(ctx) {
 export function lineup(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const allArtists = dbModel.getAllArtists(ctx.data);
-  const auth = true;
+  const auth = ctx.session.userId;
   ctx.response.body = ctx.nunjucks.render("LineUp.html", {allArtists, authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
@@ -83,7 +83,7 @@ export function artist(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const artistdataraw = dbModel.getArtist(ctx.data, ctx.params.id);
   const artistdata = artistdataraw[0];
-  const auth = true;
+  const auth = ctx.session.userId;
   ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata, authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";

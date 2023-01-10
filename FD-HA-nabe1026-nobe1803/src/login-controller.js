@@ -1,7 +1,6 @@
 import { debug as Debug } from "https://deno.land/x/debug/mod.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import * as dbModel from "./db-model.js";
-import {deleteCookie, setCookie, getCookies } from "https://deno.land/std/http/cookie.ts";
 
 const debug = Debug("app:formController");
 
@@ -37,8 +36,8 @@ export async function submitForm(ctx) {
       ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
       ctx.response.status = 303;
       ctx.state.authenticated = true;
-      //setCookie(ctx.response, {name: "UserID", value: user.id, secure: true});
-      ctx.redirect = Response.redirect(new URL("/", ctx.request.url));
+      ctx.session.userId = user.id;
+      ctx.response.headers.location = new URL("/", ctx.request.url);
     } else {
       errors.login = 'Diese Kombination aus Benutzername und Passwort ist nicht gültig.';
       console.log(errors);
@@ -89,4 +88,12 @@ function validate(username, password) {
     errors.text = "invalid password";
   }
   return errors;
+}
+
+export async function logout(ctx) {
+ctx.session.user = undefined;
+ctx.session.flash = `Du hast dich ausgeloggt.`;
+ctx.response.headers['location'] = ctx.url.origin + '/';
+ctx.response.status = 302; // Found
+return ctx;
 }

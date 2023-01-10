@@ -2,19 +2,40 @@ import nunjucks from "https://deno.land/x/nunjucks@3.2.3/mod.js";
 import { DB } from "https://deno.land/x/sqlite/mod.ts";
 import * as path from "https://deno.land/std@0.152.0/path/posix.ts";
 import * as mediaTypes from "https://deno.land/std@0.151.0/media_types/mod.ts";
-import { deleteCookie, setCookie, getCookies } from "https://deno.land/std/http/cookie.ts";
-
-
-
+import { CookieMap, mergeHeaders } from "https://deno.land/std/http/mod.ts";
+import {encode as base64Encode} from 'https://deno.land/std/encoding/base64.ts';
 import * as controller from "./controller.js";
 import * as lineupController from "./lineup-controller.js";
 import * as loginController from "./login-controller.js";
 
 
+//in extra modul auslagern
+export const createSessionStore = () => {
+  const sessionStore = new Map();
+  return {
+    get(key) {
+      const data = sessionStore.get(key);
+      if (!data) { return }
+      return data.maxAge < Date.now() ? this.destroy(key) : data.session;
+    },
+    set(key, session, maxAge) {
+      sessionStore.set(key, {
+        session, maxAge: Date.now() + maxAge
+      });
+    },
+    destroy(key) {
+      sessionStore.delete(key);
+    }
+  };
+}
+
 nunjucks.configure("templates", { autoescape: true, noCache: true });
 
 const db = new DB("./data/roadrockdb.db");
 
+const SESSION_KEY = 'my_app.session';
+const MAX_AGE = 60 * 60 * 1000 * 2; // one hour *2 because of time zone
+const sessionStore = createSessionStore();
 
 export const handleRequest = async (request) => {
   let ctx = {
@@ -25,6 +46,8 @@ export const handleRequest = async (request) => {
     state: {},
     params: {},
     session: {},
+    sessionStore: sessionStore,
+    sessionId: undefined,
     response: {
       body: undefined,
       status: undefined,
@@ -32,23 +55,38 @@ export const handleRequest = async (request) => {
     },
   }
   const base = "assets";
+  ctx.cookies = new CookieMap(ctx.request);
+  const currentSessionKey = ctx.cookies.get(SESSION_KEY);
+  ctx.session = ctx.sessionStore.get(currentSessionKey) ?? {};
   ctx = await serveStaticFile(base, ctx);
-  let result = await router(ctx);
-
-  // Handle redirect
-  if (ctx.redirect) {
-    return ctx.redirect;
+  ctx = await router(ctx);
+  //does ctx.session have an entry? (like ctx.session.userId): if so, set sessionStore with new Id
+  //else destroy sessionstore and session key (logout)
+  if (Object.values(ctx.session).find(Boolean)) {
+    ctx.sessionId = ctx.sessionId ?? createId();
+    ctx.sessionStore.set(ctx.sessionId, ctx.session, MAX_AGE);
+    const maxAge = new Date(Date.now() + MAX_AGE);
+    ctx.cookies.set(SESSION_KEY, ctx.sessionId,
+      {
+        expires: maxAge,
+        httpOnly: true,
+        overwrite: true,
+      });
+  } else {
+    ctx.sessionStore.destroy(ctx.sessionId);
+    ctx.cookies.delete(SESSION_KEY);
   }
+  ctx.response.headers = mergeHeaders(ctx.response.headers, ctx.cookies);
 
   // Fallback
-  result.response.status = result.response.status ?? 404;
-  if (!result.response.body && result.response.status == 404) {
-    result = await controller.error404(result);
+  ctx.response.status = ctx.response.status ?? 404;
+  if (!ctx.response.body && ctx.response.status == 404) {
+    ctx = await controller.error404(ctx);
   }
   
-  return new Response(result.response.body, {
-    status: result.response.status,
-    headers: result.response.headers,
+  return new Response(ctx.response.body, {
+    status: ctx.response.status,
+    headers: ctx.response.headers,
     //alternative: result.response.headers.get(HEADER)
   });
 };
@@ -111,17 +149,20 @@ export const handleRequest = async (request) => {
         return await lineupController.submitEdit(ctx);
     }
   }
-
     return await controller.error404(ctx);
   };
 
-
+export const createId = () => {
+  const array = new Uint32Array(64);
+  crypto.getRandomValues(array);
+  return base64Encode(array);
+}
 
   const serveStaticFile = async (base, ctx) => {
     const url = new URL(ctx.request.url);
     let file;
     try {
-      console.log(path.join(base, url.pathname.toString()));
+      //console.log(path.join(base, url.pathname.toString()));
       file = await Deno.open(path.join(base, url.pathname.toString()), {
         read: true,
       });
