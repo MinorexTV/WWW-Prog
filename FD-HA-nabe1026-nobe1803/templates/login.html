@@ -25,16 +25,23 @@
   <div class="mainGrid">
     <div class="pageTitle">
       <img class="centerItem" src="pictures/Logo.png" />
+      {%if authenticated %}
+      <h1>Logout</h1>
+      <form class="doubleGrid" action="#" method="POST">
+        <button class="centerItem doubleItem positive" type="submit">Logout</button>
+      </form>
+      {% else %}
       <h1>Login</h1>
-    </div>
-    <form class="doubleGrid" action="#" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" autofocus value="{{form.username}}">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" value="{{form.password}}">
-      <button class="centerItem doubleItem positive" type="submit">Login</button>
-    </form>
-  </div>
+      </div>
+        <form class="doubleGrid" action="#" method="POST">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" autofocus value="{{form.username}}">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" value="{{form.password}}">
+          <button class="centerItem doubleItem positive" type="submit">Login</button>
+        </form>
+      </div>
+      {%endif%}
 </body>
 
 </html>

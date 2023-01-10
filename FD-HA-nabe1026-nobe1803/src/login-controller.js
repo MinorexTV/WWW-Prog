@@ -1,5 +1,6 @@
 import { debug as Debug } from "https://deno.land/x/debug/mod.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
+import * as dbModel from "./db-model.js";
 import {deleteCookie, setCookie, getCookies } from "https://deno.land/std/http/cookie.ts";
 
 const debug = Debug("app:formController");
@@ -32,10 +33,11 @@ export async function submitForm(ctx) {
     //const user = await getByUsername(ctx.data, enteredUsername);
     if ((await passwordIsCorrect(user, enteredPassword)) === true) {
       user.password_hash = undefined;
-      ctx.session.user = user;
-      ctx.session.flash = `Du bist als ${user.username} eingeloggt.`;
+      ctx.state.user = user;
+      ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
       ctx.response.status = 303;
-      setCookie(ctx.response, {name: "UserID", value: user.id, secure: true});
+      ctx.state.authenticated = true;
+      //setCookie(ctx.response, {name: "UserID", value: user.id, secure: true});
       ctx.redirect = Response.redirect(new URL("/", ctx.request.url));
     } else {
       errors.login = 'Diese Kombination aus Benutzername und Passwort ist nicht gültig.';
@@ -48,7 +50,7 @@ export async function submitForm(ctx) {
 
 //should return complete user object, currently database cannot be reached
 export function getByUsername(database, usernameForm) {
-  const userData = database.queryEntries(`SELECT * FROM users WHERE username = ${usernameForm}`);
+  const userData = dbModel.getUser(database, usernameForm);
   console.log(userData);
   console.log("username: " + userData.username);
   return userData;

@@ -1,5 +1,6 @@
 import { debug as Debug } from "https://deno.land/x/debug/mod.ts";
 import { contextOrFrameLookup } from "https://deno.land/x/nunjucks@3.2.3/src/runtime.js";
+import * as dbModel from "./db-model.js";
 
 const debug = Debug("app:controller");
 
@@ -21,8 +22,8 @@ export function info(ctx) {
 
 export function index(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  const authenticated = ctx.state.authenticated;
-  ctx.response.body = ctx.nunjucks.render("index.html", {authenticated});
+  const auth = ctx.state.authenticated;
+  ctx.response.body = ctx.nunjucks.render("index.html", {authenticated : auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -60,11 +61,11 @@ export function kollophon(ctx) {
   return ctx;
 }
 
-export async function lineup(ctx) {
+export function lineup(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  const allArtists = ctx.data.queryEntries('SELECT * FROM artists');
-  //console.log("lineup(): artists: ", allArtists);
-  ctx.response.body = ctx.nunjucks.render("LineUp.html", {allArtists});
+  const allArtists = dbModel.getAllArtists(ctx.data);
+  const auth = true;
+  ctx.response.body = ctx.nunjucks.render("LineUp.html", {allArtists, authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -80,10 +81,10 @@ export function tickets(ctx) {
 
 export function artist(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  const artistdataraw = ctx.data.queryEntries(`SELECT * FROM artists WHERE artistId = ${ctx.params.id}`);
+  const artistdataraw = dbModel.getArtist(ctx.data, ctx.params.id);
   const artistdata = artistdataraw[0];
-  //console.log("artistId: ",artistdata.artistId);
-  ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata});
+  const auth = true;
+  ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata, authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -132,7 +133,8 @@ export function d_zeitleiste(ctx) {
 
 export function login(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("login.html", {});
+  const auth = ctx.state.authenticated;
+  ctx.response.body = ctx.nunjucks.render("login.html", {authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;

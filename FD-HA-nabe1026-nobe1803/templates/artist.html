@@ -40,6 +40,7 @@
             </p>
         </div>
     </div>
+    {%if authenticated%}
     <footer>
         <div class="centerItem">
             <form action="#" method="POST">
@@ -53,6 +54,7 @@
             </form>
         </div>
     </footer>
+    {% endif %}
 </body>
 
 {%endblock%}

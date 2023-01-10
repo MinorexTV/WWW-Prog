@@ -42,12 +42,14 @@
             {% endfor %}
         </ul>
     </div>
+    {%if authenticated%}
     <div class="centerItem">
         {#<button href="/lineup/add">Hinzufügen</button>#}
         <form action="/lineup/add">
             <input type="submit" value="Künstler hinzufügen" />
         </form>
     </div>
+    {%endif%}
 </body>
 
 {%endblock%}

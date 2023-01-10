@@ -1,4 +1,5 @@
 import { debug as Debug } from "https://deno.land/x/debug/mod.ts";
+import * as dbModel from "./db-model.js";
 
 const debug = Debug("app:formController");
 
@@ -12,7 +13,7 @@ export function add(ctx) {
   }
 
   export function edit(ctx) {
-    const artistdataraw = ctx.data.queryEntries(`SELECT * FROM artists WHERE artistId = ${ctx.params.id}`);
+    const artistdataraw = dbModel.getArtist(ctx.data, ctx.params.id);
     const artistdata = artistdataraw[0];
     console.log("artistdata:", artistdata);
    ctx.response.body = ctx.nunjucks.render("lineupformular.html", {form: artistdata});
@@ -38,9 +39,7 @@ export async function submitAdd(ctx) {
     ctx.response.headers["content-type"] = "text/html";
   }
   else{
-    ctx.data.query(`
-    INSERT INTO artists (name, description, time, date, picture) 
-    VALUES (:name, :description,:time, :date, :picture);`, newArtistData);
+    dbModel.addArtist(ctx.data, newArtistData);
     }
     ctx.redirect = Response.redirect(new URL("/lineup", ctx.request.url));
   
@@ -62,9 +61,7 @@ export async function submitAdd(ctx) {
       ctx.response.headers["content-type"] = "text/html";
     }
     else{
-      ctx.data.query(`UPDATE artists
-      SET name=:name ,description=:description, time=:time, date=:date
-      WHERE artists.artistId=:id`, newArtistData);
+      dbModel.editArtist(ctx.data, newArtistData);
       }
       ctx.redirect = Response.redirect(new URL(`/artist/${ctx.params.id}`, ctx.request.url));
     
@@ -72,8 +69,7 @@ export async function submitAdd(ctx) {
     }
 
   export function removeArtist(ctx) {
-    const sql ='DELETE FROM artists WHERE artistId=$id';
-    ctx.data.query(sql, {$id: ctx.params.id});
+    dbModel.removeArtist(ctx.data, ctx.params.id);
     ctx.redirect = Response.redirect(new URL("/lineup", ctx.request.url));
     return ctx;
   }
