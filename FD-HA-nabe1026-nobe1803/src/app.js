@@ -94,8 +94,8 @@ export const handleRequest = async (request) => {
    const router = async (ctx) => {
     if(ctx.response.status == 200) return ctx;
     const url = new URL(ctx.request.url);
-    const method = ctx.request.method;
-    console.log(method);
+    //const method = ctx.request.method;
+    //console.log(method);
     if (url.pathname == "/" || url.pathname == "/index") {
       console.log("cookies: " + ctx.cookies);
       return await controller.index(ctx)}

@@ -133,7 +133,7 @@ export function d_zeitleiste(ctx) {
 
 export function login(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  const auth = ctx.state.authenticated;
+  const auth = ctx.session.userId;
   ctx.response.body = ctx.nunjucks.render("login.html", {authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";

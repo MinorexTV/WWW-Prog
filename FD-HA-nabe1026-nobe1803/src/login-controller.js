@@ -32,10 +32,9 @@ export async function submitForm(ctx) {
     //const user = await getByUsername(ctx.data, enteredUsername);
     if ((await passwordIsCorrect(user, enteredPassword)) === true) {
       user.password_hash = undefined;
-      ctx.state.user = user;
-      ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
+      //ctx.state.user = user;
+      //ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
       ctx.response.status = 303;
-      ctx.state.authenticated = true;
       ctx.session.userId = user.id;
       ctx.response.headers.location = new URL("/", ctx.request.url);
     } else {
@@ -66,17 +65,6 @@ export async function passwordIsCorrect(user, password) {
   }
   return ok;
 }
-
-    
-export const isAuthenticated = (ctx) => {
-  if (!ctx.state.user) {
-    ctx.status = 403; // Forbidden
-    return ctx;
-  }
-  ctx.state.authenticated = true;
-  return ctx;
-};
-
 
 function validate(username, password) {
   let errors = {};
