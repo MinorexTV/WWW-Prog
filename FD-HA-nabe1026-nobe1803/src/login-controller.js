@@ -33,7 +33,7 @@ export async function submitForm(ctx) {
     if ((await passwordIsCorrect(user, enteredPassword)) === true) {
       user.password_hash = undefined;
       //ctx.state.user = user;
-      ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
+      //ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
       ctx.response.status = 303;
       ctx.session.userId = user.id;
       ctx.response.headers.location = new URL("/", ctx.request.url);
@@ -78,11 +78,10 @@ function validate(username, password) {
   return errors;
 }
 
-export async function logout(ctx) {
-ctx.session.user = undefined;
+export function logout(ctx) {
+ctx.session.userId = undefined;
 ctx.session.flash = `Du hast dich ausgeloggt.`;
-ctx.response.headers['location'] = '/logout'
+ctx.response.headers['location'] = '/'
 ctx.response.status = 302; // Found
-ctx.redirect = Response.redirect(new URL("/lineup", ctx.request.url));
 return ctx;
 }
