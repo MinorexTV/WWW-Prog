@@ -27,7 +27,8 @@ export async function submitForm(ctx) {
   
   const errors = validate(enteredUsername, enteredPassword);
   if (Object.values(errors).length > 0) {
-    console.log(errors);
+    ctx.errors.login = errors;
+    ctx.redirect = Response.redirect(new URL("/login", ctx.request.url));
   } else {
     //const user = await getByUsername(ctx.data, enteredUsername);
     if ((await passwordIsCorrect(user, enteredPassword)) === true) {
@@ -38,7 +39,7 @@ export async function submitForm(ctx) {
       ctx.session.userId = user.id;
       ctx.response.headers.location = new URL("/", ctx.request.url);
     } else {
-      errors.login = 'Diese Kombination aus Benutzername und Passwort ist nicht gültig.';
+      ctx.errors.login = 'Diese Kombination aus Benutzername und Passwort ist nicht gültig.';
       console.log(errors);
       ctx.redirect = Response.redirect(new URL("/login", ctx.request.url));
     }

@@ -46,6 +46,7 @@ export const handleRequest = async (request) => {
     state: {},
     params: {},
     session: {},
+    errors: {},
     sessionStore: sessionStore,
     sessionId: undefined,
     response: {
@@ -104,6 +105,7 @@ export const handleRequest = async (request) => {
         return await loginController.submitForm(ctx);
       }
       else{
+        
         return await controller.login(ctx);
       }
     }
