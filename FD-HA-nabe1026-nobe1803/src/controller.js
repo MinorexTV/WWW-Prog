@@ -139,3 +139,11 @@ export function login(ctx) {
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
 }
+
+export function logout(ctx) {
+  debug("@index. ctx %O", ctx.request.url);
+  ctx.response.body = ctx.nunjucks.render("logout.html", {});
+  ctx.response.status = 200;
+  ctx.response.headers["content-type"] = "text/html";
+  return ctx;
+}

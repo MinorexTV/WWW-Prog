@@ -94,7 +94,7 @@ export const handleRequest = async (request) => {
    const router = async (ctx) => {
     if(ctx.response.status == 200) return ctx;
     const url = new URL(ctx.request.url);
-    //const method = ctx.request.method;
+    const method = ctx.request.method;
     //console.log(method);
     if (url.pathname == "/" || url.pathname == "/index") {
       console.log("cookies: " + ctx.cookies);
@@ -107,6 +107,14 @@ export const handleRequest = async (request) => {
         return await controller.login(ctx);
       }
     }
+     if (url.pathname == "/logout") {
+       if (method == "POST") {
+         return await loginController.logout(ctx);
+       }
+       else {
+         return await controller.logout(ctx);
+       }
+     }
     if (url.pathname == "/info") return await controller.info(ctx);
     if (url.pathname == "/datenschutz") return await controller.datenschutz(ctx);
     if (url.pathname == "/formular") return await controller.formular(ctx);
