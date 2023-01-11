@@ -151,7 +151,7 @@ export const handleRequest = async (request) => {
     if (url.pathname.match(/\/artist\/([0-9]*)\/edit/)){
       const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
       ctx.params.id = matches[1];
-      console.log("ctx.params.id: ", ctx.params.id);
+      //console.log("ctx.params.id: ", ctx.params.id);
       if(method=="GET"){
       return await lineupController.edit(ctx);
       }

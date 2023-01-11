@@ -14,7 +14,8 @@ export function error404(ctx) {
 
 export function info(ctx) {
   debug("@about. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("info.html", {});
+  const auth = ctx.session.userId;
+  ctx.response.body = ctx.nunjucks.render("info.html", {authenticated : auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -31,7 +32,8 @@ export function index(ctx) {
 
 export function datenschutz(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("datenschutzerklärung.html", {});
+  const auth = ctx.session.userId;
+  ctx.response.body = ctx.nunjucks.render("datenschutzerklärung.html", {authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -39,6 +41,7 @@ export function datenschutz(ctx) {
 
 export function formular(ctx) {
   debug("@index. ctx %O", ctx.request.url);
+  const auth = ctx.session.userId;
   ctx.response.body = ctx.nunjucks.render("Formular.html", {});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
@@ -47,7 +50,8 @@ export function formular(ctx) {
 
 export function impressum(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("Impressum.html", {});
+  const auth = ctx.session.userId;
+  ctx.response.body = ctx.nunjucks.render("Impressum.html", {authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -55,7 +59,8 @@ export function impressum(ctx) {
 
 export function kollophon(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("Kollophon.html", {});
+  const auth = ctx.session.userId;
+  ctx.response.body = ctx.nunjucks.render("Kollophon.html", {authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -73,7 +78,8 @@ export function lineup(ctx) {
 
 export function tickets(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("tickets.html", {});
+  const auth = ctx.session.userId;
+  ctx.response.body = ctx.nunjucks.render("tickets.html", {authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -83,6 +89,7 @@ export function artist(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const artistdataraw = dbModel.getArtist(ctx.data, ctx.params.id);
   const artistdata = artistdataraw[0];
+  artistdata.date = ConvertDate(artistdata.date);
   const auth = ctx.session.userId;
   ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata, authenticated: auth});
   ctx.response.status = 200;
@@ -147,4 +154,14 @@ export function logout(ctx) {
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
+}
+
+export function ConvertDate(date) {
+  const dateArray = date.split("-");
+  const year = dateArray[0];
+  const month = dateArray[1];
+  const day = dateArray[2];
+  const convertedDate = `${day}.${month}.${year}`;
+  //console.log(convertedDate);
+  return convertedDate;
 }

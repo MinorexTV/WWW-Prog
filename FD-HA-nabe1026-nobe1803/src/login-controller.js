@@ -25,10 +25,11 @@ export async function submitForm(ctx) {
   const enteredUsername = enteredLoginData.get("name");
   const enteredPassword = enteredLoginData.get("password");
   
-  const errors = validate(enteredUsername, enteredPassword);
-  if (Object.values(errors).length > 0) {
-    ctx.errors.login = errors;
-    ctx.response.body = ctx.nunjucks.render("login.html", { errors: errors }); //namen übernehmen
+  ctx.errors.login = validate(enteredUsername, enteredPassword);
+  if (Object.values(ctx.errors.login).length > 0) {
+    const errors = ctx.errors.login;
+    console.log("errors: ", errors);
+    ctx.response.body = ctx.nunjucks.render("login.html", { errors, name: enteredUsername});
     ctx.response.status = 200;
     ctx.response.headers["content-type"] = "text/html";
   } else {
@@ -75,10 +76,10 @@ function validate(username, password) {
   let errors = {};
 
   if (!isValidText(username)) {
-    errors.title = "invalid username";
+    errors.name = "invalid username";
   }
   if (!isValidText(password)) {
-    errors.text = "invalid password";
+    errors.password = "invalid password";
   }
   return errors;
 }

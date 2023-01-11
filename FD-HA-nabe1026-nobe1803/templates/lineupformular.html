@@ -32,7 +32,7 @@
         <form class="doubleGrid" action="#" method="POST">
             <label for="artistname">Künstername</label>
             <div>
-                {% if errors.artistname %}<p class="Form-error">{{errors.artistname}}</p>{% endif %}
+                {% if errors.title %}<p class="Form-error">{{errors.title}}</p>{% endif %}
                 <input type="text" id="artistname" name="artistname" autofocus value="{{form.name}}">
             </div>
             <label for="date">Datum</label>

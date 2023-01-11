@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
   <div class="navbarTop">
     <a href="/">Home</a>
     <a href="/lineup">LineUp</a>
@@ -25,14 +24,16 @@
     </div>
     <form class="doubleGrid" action="#" method="POST">
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name" autofocus value="{{form.username}}">
+      <input type="text" id="name" name="name" autofocus value="{{name}}">
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" value="{{form.password}}">
       <button class="centerItem doubleItem positive" type="submit">Login</button>
     </form>
-
-    <p>{{errors}}</p>
-  </div>
+    <div>
+          <p>{{errors.name}}</p>
+          <p>{{errors.password}}</p>
+    </div>
+    </div>
 </body>
 
 </html>
