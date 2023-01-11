@@ -28,7 +28,9 @@ export async function submitForm(ctx) {
   const errors = validate(enteredUsername, enteredPassword);
   if (Object.values(errors).length > 0) {
     ctx.errors.login = errors;
-    ctx.redirect = Response.redirect(new URL("/login", ctx.request.url));
+    ctx.response.body = ctx.nunjucks.render("login.html", { errors: errors }); //namen übernehmen
+    ctx.response.status = 200;
+    ctx.response.headers["content-type"] = "text/html";
   } else {
     //const user = await getByUsername(ctx.data, enteredUsername);
     if ((await passwordIsCorrect(user, enteredPassword)) === true) {
@@ -41,7 +43,9 @@ export async function submitForm(ctx) {
     } else {
       ctx.errors.login = 'Diese Kombination aus Benutzername und Passwort ist nicht gültig.';
       console.log(errors);
-      ctx.redirect = Response.redirect(new URL("/login", ctx.request.url));
+      ctx.response.body = ctx.nunjucks.render("login.html", { errors: errors }); //namen übernehmen
+      ctx.response.status = 200;
+      ctx.response.headers["content-type"] = "text/html";
     }
   }
   return ctx;
