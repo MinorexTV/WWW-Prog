@@ -7,11 +7,11 @@ const debug = Debug("app:formController");
 export const isValidText = (text) => text.length >= 2;
 
 //only for testing:
-export const user = {
-  username: "Nat",
-  password: "1234",
-  id: "1"
-};
+//export const user = {
+  //username: "Nat",
+  //password: "1234",
+  //id: "1"
+//};
 
 export function add(ctx) {
    ctx.response.body = ctx.nunjucks.render("login.html", {});
@@ -33,8 +33,8 @@ export async function submitForm(ctx) {
     ctx.response.status = 200;
     ctx.response.headers["content-type"] = "text/html";
   } else {
-    //const user = await getByUsername(ctx.data, enteredUsername);
-    if ((await passwordIsCorrect(user, enteredPassword)) === true) {
+    const user = await getByUsername(ctx.data, enteredUsername);
+    if ((await checkPassword(user, enteredPassword)) === true) {
       user.password_hash = undefined;
       //ctx.state.user = user;
       //ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
@@ -54,15 +54,17 @@ export async function submitForm(ctx) {
 
 //should return complete user object, currently database cannot be reached
 export function getByUsername(database, usernameForm) {
-  const userData = dbModel.getUser(database, usernameForm);
+  const userDataRaw = dbModel.getUser(database, usernameForm);
+  const userData = userDataRaw[0];
   console.log(userData);
   console.log("username: " + userData.username);
   return userData;
 }
 
-export async function passwordIsCorrect(user, password) {
-  const hash_from_DB = await bcrypt.hash(user.password);
-  const ok = await bcrypt.compare(password, hash_from_DB);
+export async function checkPassword(user, password) {
+  
+  //const hash_from_DB = await bcrypt.hash(user.password);
+  const ok = await bcrypt.compare(password, user.password);
   if (ok === true) {
     console.log("Password is correct");
   }

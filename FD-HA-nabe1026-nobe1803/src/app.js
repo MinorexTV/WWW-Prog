@@ -96,9 +96,7 @@ export const handleRequest = async (request) => {
     if(ctx.response.status == 200) return ctx;
     const url = new URL(ctx.request.url);
     const method = ctx.request.method;
-    //console.log(method);
     if (url.pathname == "/" || url.pathname == "/index") {
-      console.log("cookies: " + ctx.cookies);
       return await controller.index(ctx)}
     if (url.pathname == "/login"){
       if(method == "POST"){
@@ -151,7 +149,6 @@ export const handleRequest = async (request) => {
     if (url.pathname.match(/\/artist\/([0-9]*)\/edit/)){
       const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
       ctx.params.id = matches[1];
-      //console.log("ctx.params.id: ", ctx.params.id);
       if(method=="GET"){
       return await lineupController.edit(ctx);
       }
@@ -172,7 +169,6 @@ export const createId = () => {
     const url = new URL(ctx.request.url);
     let file;
     try {
-      //console.log(path.join(base, url.pathname.toString()));
       file = await Deno.open(path.join(base, url.pathname.toString()), {
         read: true,
       });

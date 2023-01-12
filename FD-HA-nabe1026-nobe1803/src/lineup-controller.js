@@ -19,7 +19,6 @@ export function add(ctx) {
     const auth = ctx.session.userId;
     const artistdataraw = dbModel.getArtist(ctx.data, ctx.params.id);
     const artistdata = artistdataraw[0];
-    //console.log("artistdata:", artistdata);
    ctx.response.body = ctx.nunjucks.render("lineupformular.html", {form: artistdata, authenticated: auth});
    ctx.response.status = 200;
    ctx.response.headers["content-type"] = "text/html";
@@ -36,7 +35,6 @@ export async function submitAdd(ctx) {
     date: artistData.get("date"),
     picture: "/pictures/band" + (Math.floor(Math.random() * 6)+1) + ".jpg"
   };
-  //console.log("newArtistData: ",newArtistData);
   const errors = validate(newArtistData);
   if (Object.values(errors).length > 0) {
     ctx.response.body = ctx.nunjucks.render("lineupformular.html", {errors: errors, form: newArtistData, authenticated: auth});

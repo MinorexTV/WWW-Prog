@@ -162,6 +162,5 @@ export function ConvertDate(date) {
   const month = dateArray[1];
   const day = dateArray[2];
   const convertedDate = `${day}.${month}.${year}`;
-  //console.log(convertedDate);
   return convertedDate;
 }
