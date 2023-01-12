@@ -138,15 +138,6 @@ export function d_zeitleiste(ctx) {
   return ctx;
 }
 
-export function login(ctx) {
-  debug("@index. ctx %O", ctx.request.url);
-  const auth = ctx.session.userId;
-  const errors = ctx.errors.login;
-  ctx.response.body = ctx.nunjucks.render("login.html", {authenticated: auth, errors});
-  ctx.response.status = 200;
-  ctx.response.headers["content-type"] = "text/html";
-  return ctx;
-}
 
 export function logout(ctx) {
   debug("@index. ctx %O", ctx.request.url);

@@ -22,15 +22,19 @@
       <img class="centerItem" src="pictures/Logo.png" />
       <h1>Login</h1>
     </div>
-    <div>
-      <p>{{errors.name}}</p>
-      <p>{{errors.password}}</p>
-    </div>
     <form class="doubleGrid" action="#" method="POST">
       <label for="name">Name:</label>
+      <div>
+      {% if errors.name %}<p class="Form-error">{{errors.name}}</p>{% endif %}
+      {% if errors.input.name %}<p class="Form-error">{{errors.input.name}}</p>{% endif %}
       <input type="text" id="name" name="name" autofocus value="{{name}}">
+      </div>
       <label for="password">Password:</label>
-      <input type="password" id="password" name="password" value="{{form.password}}">
+      <div>
+      {% if errors.password %}<p class="Form-error">{{errors.password}}</p>{% endif %}
+      {% if errors.input.password %}<p class="Form-error">{{errors.input.password}}</p>{% endif %}
+      <input type="password" id="password" name="password" value="">
+      </div>
       <button class="centerItem doubleItem positive" type="submit">Login</button>
     </form>
     </div>

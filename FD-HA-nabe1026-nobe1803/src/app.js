@@ -104,7 +104,7 @@ export const handleRequest = async (request) => {
       }
       else{
         
-        return await controller.login(ctx);
+        return await loginController.login(ctx);
       }
     }
      if (url.pathname == "/logout") {
