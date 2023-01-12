@@ -233,6 +233,12 @@
         margin-top: 2em;
         margin-bottom: 2em;
     }
+    .Form-Error {
+        font-size: 2vw;
+        color:orangered;
+    }
+
+
 
 
     /* --------------------------------Grids ----------------------------------------------------*/

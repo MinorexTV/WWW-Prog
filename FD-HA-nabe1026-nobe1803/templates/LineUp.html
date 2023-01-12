@@ -41,15 +41,16 @@
             </li>
             {% endfor %}
         </ul>
+        {%if authenticated%}
+        <div class="centerItem">
+            <form action="/lineup/add">
+                <button type="submit">Künstler Hinzufügen</button>
+            </form>
+        </div>
+        {%endif%}
+        
     </div>
-    {%if authenticated%}
-    <div class="centerItem">
-        {#<button href="/lineup/add">Hinzufügen</button>#}
-        <form action="/lineup/add">
-            <input type="submit" value="Künstler hinzufügen" />
-        </form>
-    </div>
-    {%endif%}
+    
 </body>
 
 {%endblock%}

@@ -41,16 +41,16 @@
         </div>
     </div>
     {%if authenticated%}
-    <footer>
+      <footer>
         <div class="centerItem">
             <form action="#" method="POST">
-                <input id:"delete" type="submit" value="Eintrag Entfernen" />
+                <button id:"delete" type="submit">Eintrag entfernen</button>
             </form>
         </div>
 
         <div class="centerItem">
             <form action="/artist/{{artistdata.artistId}}/edit" method="GET">
-                <input id:"change" type="submit" value="Eintrag verändern" />
+                <button id:"change" type="submit">Eintrag verändern</button>
             </form>
         </div>
     </footer>
