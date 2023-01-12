@@ -32,23 +32,23 @@
         <form class="doubleGrid" action="#" method="POST">
             <label for="artistname">Künstername</label>
             <div>
-                {% if errors.title %}<p class="Form-error">{{errors.title}}</p>{% endif %}
                 <input type="text" id="artistname" name="artistname" autofocus value="{{form.name}}">
+                {% if errors.title %}<p class="formError">{{errors.title}}</p>{% endif %}
             </div>
             <label for="date">Datum</label>
             <div>
-                {% if errors.date %}<p class="Form-date">{{errors.date}}</p>{% endif %}
                 <input type="date" id="date" name="date" value="{{form.date}}">
+                {% if errors.date %}<p class="formError">{{errors.date}}</p>{% endif %}
             </div>
             <label for="time">Zeit</label>
             <div>
-                {% if errors.time %}<p class="Form-time">{{errors.time}}</p>{% endif %}
                 <input type="time" id="time" name="time" value="{{form.time}}">
+                   {% if errors.time %}<p class="formError">{{errors.time}}</p>{% endif %}
             </div>
             <label for="text">Beschreibung</label>
             <div>
-                {% if errors.text %}<p class="Form-error">{{errors.text}}</p>{% endif %}
                 <textarea id="text" name="text" rows="8" cols="20">{{form.description}}</textarea>
+                 {% if errors.text %}<p class="formError">{{errors.text}}</p>{% endif %}
             </div>
             <button class="centerItem doubleItem positive" type="submit">Speichern</button>
         </form>

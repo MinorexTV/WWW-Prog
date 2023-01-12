@@ -25,15 +25,15 @@
     <form class="doubleGrid" action="#" method="POST">
       <label for="name">Name:</label>
       <div>
-      {% if errors.name %}<p class="Form-error">{{errors.name}}</p>{% endif %}
-      {% if errors.input.name %}<p class="Form-error">{{errors.input.name}}</p>{% endif %}
       <input type="text" id="name" name="name" autofocus value="{{name}}">
+      {% if errors.name %}<p class="formError">{{errors.name}}</p>{% endif %}
+      {% if errors.input.name %}<p class="formError">{{errors.input.name}}</p>{% endif %}
       </div>
       <label for="password">Password:</label>
       <div>
-      {% if errors.password %}<p class="Form-Error">{{errors.password}}</p>{% endif %}
-      {% if errors.input.password %}<p class="Form-Error">{{errors.input.password}}</p>{% endif %}
       <input type="password" id="password" name="password" value="">
+            {% if errors.password %}<p class="formError">{{errors.password}}</p>{% endif %}
+      {% if errors.input.password %}<p class="formError">{{errors.input.password}}</p>{% endif %}
       </div>
       <button class="centerItem doubleItem positive" type="submit">Login</button>
     </form>

@@ -7,6 +7,7 @@ import {encode as base64Encode} from 'https://deno.land/std/encoding/base64.ts';
 import * as controller from "./controller.js";
 import * as lineupController from "./lineup-controller.js";
 import * as loginController from "./login-controller.js";
+import * as ticketController from "./ticket-controller.js";
 
 
 //in extra modul auslagern
@@ -118,6 +119,7 @@ export const handleRequest = async (request) => {
     if (url.pathname == "/info") return await controller.info(ctx);
     if (url.pathname == "/datenschutz") return await controller.datenschutz(ctx);
     if (url.pathname == "/formular") return await controller.formular(ctx);
+    if (url.pathname == "/confirmation") return await ticketController.confirmation(ctx);
     if (url.pathname == "/impressum") return await controller.impressum(ctx);
     if (url.pathname == "/kollophon") return await controller.kollophon(ctx);
     if (url.pathname == "/lineup") return await controller.lineup(ctx);
@@ -130,6 +132,22 @@ export const handleRequest = async (request) => {
       }
     }
     if (url.pathname == "/tickets") return await controller.tickets(ctx);
+    if (url.pathname == "/tagesticket") {
+      if(method == "GET"){
+      return await ticketController.tagesticket(ctx);
+      }
+      else{
+        return await ticketController.tagesticketSubmit(ctx);
+      }
+    }
+    if (url.pathname == "/vipticket") {
+      if(method == "GET"){
+      return await ticketController.vipticket(ctx);
+      }
+      else{
+        return await ticketController.vipticketSubmit(ctx);
+      }
+    }
     if (url.pathname == "/documentation") return await controller.documentation(ctx);
     if (url.pathname == "/documentation/module") return await controller.d_module(ctx);
     if (url.pathname == "/documentation/farben") return await controller.d_farben(ctx);

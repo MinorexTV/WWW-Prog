@@ -218,6 +218,15 @@
         max-width: 80%;
         margin: auto;
     }
+    
+    .formError {
+        font-size: 1vw;
+        color: red;
+    }
+    .checkbox {
+        height: 2vw;
+        width: 2vw;
+    }
 
     /* --------------------------------Grids ----------------------------------------------------*/
 
