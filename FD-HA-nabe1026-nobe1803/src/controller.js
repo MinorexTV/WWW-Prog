@@ -42,7 +42,7 @@ export function datenschutz(ctx) {
 export function formular(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("Formular.html", {});
+  ctx.response.body = ctx.nunjucks.render("Formular.html", {authenticated: auth});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;

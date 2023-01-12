@@ -22,6 +22,10 @@
       <img class="centerItem" src="pictures/Logo.png" />
       <h1>Login</h1>
     </div>
+    <div>
+      <p>{{errors.name}}</p>
+      <p>{{errors.password}}</p>
+    </div>
     <form class="doubleGrid" action="#" method="POST">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" autofocus value="{{name}}">
@@ -29,10 +33,6 @@
       <input type="password" id="password" name="password" value="{{form.password}}">
       <button class="centerItem doubleItem positive" type="submit">Login</button>
     </form>
-    <div>
-          <p>{{errors.name}}</p>
-          <p>{{errors.password}}</p>
-    </div>
     </div>
 </body>
 

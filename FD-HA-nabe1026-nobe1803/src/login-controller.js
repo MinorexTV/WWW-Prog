@@ -6,13 +6,6 @@ const debug = Debug("app:formController");
 
 export const isValidText = (text) => text.length >= 2;
 
-//only for testing:
-//export const user = {
-  //username: "Nat",
-  //password: "1234",
-  //id: "1"
-//};
-
 export function add(ctx) {
    ctx.response.body = ctx.nunjucks.render("login.html", {});
    ctx.response.status = 200;
@@ -34,7 +27,7 @@ export async function submitForm(ctx) {
     ctx.response.headers["content-type"] = "text/html";
   } else {
     const user = await getByUsername(ctx.data, enteredUsername);
-    if ((await checkPassword(user, enteredPassword)) === true) {
+    if (await bcrypt.compare(password, user.password)) {
       user.password_hash = undefined;
       //ctx.state.user = user;
       //ctx.state.flash = `Du bist als ${user.username} eingeloggt.`;
@@ -44,7 +37,7 @@ export async function submitForm(ctx) {
     } else {
       ctx.errors.login = 'Diese Kombination aus Benutzername und Passwort ist nicht gültig.';
       console.log(errors);
-      ctx.response.body = ctx.nunjucks.render("login.html", { errors: errors }); //namen übernehmen
+      ctx.response.body = ctx.nunjucks.render("login.html", { errors, name: enteredUsername}); //namen übernehmen
       ctx.response.status = 200;
       ctx.response.headers["content-type"] = "text/html";
     }
@@ -57,22 +50,18 @@ export function getByUsername(database, usernameForm) {
   const userDataRaw = dbModel.getUser(database, usernameForm);
   const userData = userDataRaw[0];
   console.log(userData);
-  console.log("username: " + userData.username);
-  return userData;
+  if(userData == undefined) {
+      ctx.errors.name = 'Dieser Username existiert nicht.';
+      console.log(errors);
+      ctx.response.body = ctx.nunjucks.render("login.html", { errors, name: enteredUsername}); //namen übernehmen
+      ctx.response.status = 200;
+      ctx.response.headers["content-type"] = "text/html";
+  }
+  else{
+    return userData;
+  }
 }
 
-export async function checkPassword(user, password) {
-  
-  //const hash_from_DB = await bcrypt.hash(user.password);
-  const ok = await bcrypt.compare(password, user.password);
-  if (ok === true) {
-    console.log("Password is correct");
-  }
-  else {
-    console.log("Password is incorrect");
-  }
-  return ok;
-}
 
 function validate(username, password) {
   let errors = {};
