@@ -15,7 +15,7 @@ export function error404(ctx) {
 export function info(ctx) {
   debug("@about. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("info.html", {authenticated : auth});
+  ctx.response.body = ctx.nunjucks.render("info.html", { authenticated: auth });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -24,7 +24,9 @@ export function info(ctx) {
 export function index(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("index.html", {authenticated : auth});
+  ctx.response.body = ctx.nunjucks.render("index.html", {
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -33,7 +35,9 @@ export function index(ctx) {
 export function datenschutz(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("datenschutzerklärung.html", {authenticated: auth});
+  ctx.response.body = ctx.nunjucks.render("datenschutzerklärung.html", {
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -42,7 +46,9 @@ export function datenschutz(ctx) {
 export function formular(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("Formular.html", {authenticated: auth});
+  ctx.response.body = ctx.nunjucks.render("Formular.html", {
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -51,7 +57,9 @@ export function formular(ctx) {
 export function impressum(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("Impressum.html", {authenticated: auth});
+  ctx.response.body = ctx.nunjucks.render("Impressum.html", {
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -60,7 +68,9 @@ export function impressum(ctx) {
 export function kollophon(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("Kollophon.html", {authenticated: auth});
+  ctx.response.body = ctx.nunjucks.render("Kollophon.html", {
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -70,7 +80,10 @@ export function lineup(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const allArtists = dbModel.getAllArtists(ctx.data);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("LineUp.html", {allArtists, authenticated: auth});
+  ctx.response.body = ctx.nunjucks.render("LineUp.html", {
+    allArtists,
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -79,7 +92,9 @@ export function lineup(ctx) {
 export function tickets(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("tickets.html", {authenticated: auth});
+  ctx.response.body = ctx.nunjucks.render("tickets.html", {
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -91,7 +106,10 @@ export function artist(ctx) {
   const artistdata = artistdataraw[0];
   artistdata.date = ConvertDate(artistdata.date);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("artist.html", {artistdata, authenticated: auth});
+  ctx.response.body = ctx.nunjucks.render("artist.html", {
+    artistdata,
+    authenticated: auth,
+  });
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
@@ -129,7 +147,6 @@ export function d_erklaerung(ctx) {
   return ctx;
 }
 
-
 export function d_zeitleiste(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   ctx.response.body = ctx.nunjucks.render("d_zeitleiste.html", {});
@@ -137,7 +154,6 @@ export function d_zeitleiste(ctx) {
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
 }
-
 
 export function logout(ctx) {
   debug("@index. ctx %O", ctx.request.url);

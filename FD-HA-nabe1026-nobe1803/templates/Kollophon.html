@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Kollophon</title>
     <meta name="home" content="width=device-width, initial-scale=1" />
     <link href="/css/Style.css" type="text/css" rel="stylesheet" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="navbarTop">
-        <a class=active href="/index">Home</a>
-        <a href="/lineup">LineUp</a>
-        <a href="/tickets">Tickets & Preise</a>
-        <a href="/info">Info</a>
-        {% if authenticated %}
-        <a href="/logout">Logout</a>
-        {% else %}
-        <a href="/login">Login</a>
-        {% endif %}
+      <a class="active" href="/index">Home</a>
+      <a href="/lineup">LineUp</a>
+      <a href="/tickets">Tickets & Preise</a>
+      <a href="/info">Info</a>
+      {% if authenticated %}
+      <a href="/logout">Logout</a>
+      {% else %}
+      <a href="/login">Login</a>
+      {% endif %}
     </div>
-
 
     <div class="Impressum">
-        <h2>Kollophon</h2>
+      <h2>Kollophon</h2>
 
-        <div class="mainGrid">
-
-            <h3>Quelle aller verwendeten Bilder</h3>
-            <p>https://pixabay.com/images/</p>
-            <h3>Quelle Video</h3>
-            <p>https://www.pexels.com/de-de/video/menschen-bei-einem-konzert-3042698/</p>
-            <h3>Quelle Datenschutzerklärung</h3>
-            <p> Datenschutz-Konfigurator von mein-datenschutzbeauftragter.de</p>
-
-
-        </div>
+      <div class="mainGrid">
+        <h3>Quelle aller verwendeten Bilder</h3>
+        <p>https://pixabay.com/images/</p>
+        <h3>Quelle Video</h3>
+        <p>
+          https://www.pexels.com/de-de/video/menschen-bei-einem-konzert-3042698/
+        </p>
+        <h3>Quelle Datenschutzerklärung</h3>
+        <p>Datenschutz-Konfigurator von mein-datenschutzbeauftragter.de</p>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

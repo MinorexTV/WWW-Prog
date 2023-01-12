@@ -1,68 +1,59 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Road Rock - Home</title>
     <meta name="home" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://use.typekit.net/aaf2yga.css">
+    <link rel="stylesheet" href="https://use.typekit.net/aaf2yga.css" />
     <link href="/css/Style.css" type="text/css" rel="stylesheet" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <video id="vid" autoplay loop muted>
-        <source src="pictures/video3.mp4" type="video/mp4">
+      <source src="pictures/video3.mp4" type="video/mp4" />
     </video>
 
     <div class="navbarTop">
-        <a class=active href="/">Home</a>
-        <a href="/lineup">LineUp</a>
-        <a href="/tickets">Tickets & Preise</a>
-        <a href="/info">Info</a>
-        {% if authenticated %}
-        <a href="/logout">Logout</a>
-        {% else %}
-        <a href="/login">Login</a>
-        {% endif %}
+      <a class="active" href="/">Home</a>
+      <a href="/lineup">LineUp</a>
+      <a href="/tickets">Tickets & Preise</a>
+      <a href="/info">Info</a>
+      {% if authenticated %}
+      <a href="/logout">Logout</a>
+      {% else %}
+      <a href="/login">Login</a>
+      {% endif %}
     </div>
 
-
     <main class="overlay">
-        <div class="mainGrid">
-            <div class="logo">
-                <h1>
-                    <p>Road</p>
-                    <p class="rock">Rock</p>
-                    <p>Festival</p>
-                    <p class="date">20.-22.01. Flensburg</p>
-                </h1>
-
-            </div>
-
-            <a class="adLink" href="/tickets">Sicher dir jetzt dein Ticket!</a>
+      <div class="mainGrid">
+        <div class="logo">
+          <h1>
+            <p>Road</p>
+            <p class="rock">Rock</p>
+            <p>Festival</p>
+            <p class="date">20.-22.01. Flensburg</p>
+          </h1>
         </div>
 
+        <a class="adLink" href="/tickets">Sicher dir jetzt dein Ticket!</a>
+      </div>
 
-        <footer>
-            <div>
-                <p>Kontakt </p>
-                <p>roadrock@flensburg.com </p>
-                <p>@roadrock_flensburg </p>
-                <p><a href="/documentation" class="neutralLink">Dokumentation</a></p>
-                <p><a href="/kollophon" class="neutralLink">Kollophon</a></p>
-
-            </div>
-            <div>
-                <p>Rechtliches</p>
-                <p><a href="/impressum" class="neutralLink">Impressum</a></p>
-                <p><a href="/datenschutz" class="neutralLink">Datenschutz</a></p>
-                <p>AGB</p>
-            </div>
-        </footer>
-
+      <footer>
+        <div>
+          <p>Kontakt</p>
+          <p>roadrock@flensburg.com</p>
+          <p>@roadrock_flensburg</p>
+          <p><a href="/documentation" class="neutralLink">Dokumentation</a></p>
+          <p><a href="/kollophon" class="neutralLink">Kollophon</a></p>
+        </div>
+        <div>
+          <p>Rechtliches</p>
+          <p><a href="/impressum" class="neutralLink">Impressum</a></p>
+          <p><a href="/datenschutz" class="neutralLink">Datenschutz</a></p>
+          <p>AGB</p>
+        </div>
+      </footer>
     </main>
-
-</body>
-
+  </body>
 </html>

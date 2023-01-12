@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <meta name="login" content="width=device-width, initial-scale=1" />
+    <link href="/css/Style.css" type="text/css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <title>Login</title>
-  <meta name="login" content="width=device-width, initial-scale=1">
-  <link href="/css/Style.css" type="text/css" rel="stylesheet" />
-</head>
-
-<body>
-  <div class="navbarTop">
-    <a href="/">Home</a>
-    <a href="/lineup">LineUp</a>
-    <a href="/tickets">Tickets & Preise</a>
-    <a href="/info">Info</a>
-    <a class=active href="/login">Login</a>
-  </div>
-
-  <div class="mainGrid">
-    <div class="pageTitle">
-      <img class="centerItem" src="pictures/Logo.png" />
-      <h1>Login</h1>
+  <body>
+    <div class="navbarTop">
+      <a href="/">Home</a>
+      <a href="/lineup">LineUp</a>
+      <a href="/tickets">Tickets & Preise</a>
+      <a href="/info">Info</a>
+      <a class="active" href="/login">Login</a>
     </div>
-    <form class="doubleGrid" action="#" method="POST">
-      <label for="name">Name:</label>
-      <div>
-      <input type="text" id="name" name="name" autofocus value="{{name}}">
-      {% if errors.name %}<p class="formError">{{errors.name}}</p>{% endif %}
-      {% if errors.input.name %}<p class="formError">{{errors.input.name}}</p>{% endif %}
-      </div>
-      <label for="password">Password:</label>
-      <div>
-      <input type="password" id="password" name="password" value="">
-            {% if errors.password %}<p class="formError">{{errors.password}}</p>{% endif %}
-      {% if errors.input.password %}<p class="formError">{{errors.input.password}}</p>{% endif %}
-      </div>
-      <button class="centerItem doubleItem positive" type="submit">Login</button>
-    </form>
-    </div>
-</body>
 
+    <div class="mainGrid">
+      <div class="pageTitle">
+        <img class="centerItem" src="pictures/Logo.png" />
+        <h1>Login</h1>
+      </div>
+      <form class="doubleGrid" action="#" method="POST">
+        <label for="name">Name:</label>
+        <div>
+          <input type="text" id="name" name="name" autofocus value="{{name}}" />
+          {% if errors.name %}
+          <p class="formError">{{errors.name}}</p>
+          {% endif %} {% if errors.input.name %}
+          <p class="formError">{{errors.input.name}}</p>
+          {% endif %}
+        </div>
+        <label for="password">Password:</label>
+        <div>
+          <input type="password" id="password" name="password" value="" />
+          {% if errors.password %}
+          <p class="formError">{{errors.password}}</p>
+          {% endif %} {% if errors.input.password %}
+          <p class="formError">{{errors.input.password}}</p>
+          {% endif %}
+        </div>
+        <button class="centerItem doubleItem positive" type="submit">
+          Login
+        </button>
+      </form>
+    </div>
+  </body>
 </html>

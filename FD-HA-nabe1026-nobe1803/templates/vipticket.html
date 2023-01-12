@@ -1,63 +1,69 @@
-{% extends 'layout.html' %}
-
-{%block content%}
+{% extends 'layout.html' %} {%block content%}
 
 <head>
-    <meta charset="utf-8" />
-    <title>Road Rock - Ticket bestellen</title>
-    <meta name="about" content="width=device-width, initial-scale=1">
-    <link href="/css/Style.css" type="text/css" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <title>Road Rock - Ticket bestellen</title>
+  <meta name="about" content="width=device-width, initial-scale=1" />
+  <link href="/css/Style.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-    <nav>
-        <div class="navbarTop">
-            <a href="/index">Home</a>
-            <a href="/lineup">LineUp</a>
-            <a class=active href="/tickets">Tickets & Preise</a>
-            <a href="/info">Info</a>
-            {% if authenticated %}
-            <a href="/logout">Logout</a>
-            {% else %}
-            <a href="/login">Login</a>
-            {% endif %}
-        </div>
-    </nav>
+  <nav>
+    <div class="navbarTop">
+      <a href="/index">Home</a>
+      <a href="/lineup">LineUp</a>
+      <a class="active" href="/tickets">Tickets & Preise</a>
+      <a href="/info">Info</a>
+      {% if authenticated %}
+      <a href="/logout">Logout</a>
+      {% else %}
+      <a href="/login">Login</a>
+      {% endif %}
+    </div>
+  </nav>
 
-    <div class="mainGrid">
-        <div class="pageTitle">
-            <a href="/tickets" class="neutralLink centerItem">
-                <img class="smallImage" src="pictures/pfeil.png" alt="" /> </a>
-            <h2 class="centerItem">VIP-Ticket</h2>
-        </div>
-
-        <form class="doubleGrid" action="#" method="POST" accept-charset="utf-8">
-            <label for="vname">Vorname</label>
-            <input name="surname" type="text" id="vname" required>
-
-            <label for="nname">Nachname</label>
-            <input name="name" type="text" id="nname" required>
-
-            <label for="email">Email</label>
-            <input name="email" type="text" id="email" required>
-
-            <p class="centerItem">VIP-Ticket</p>
-            <p class="centerItem">100€</p>
-
-            <div class="centerItem">
-                <input class= "checkbox" type="checkbox" id="foodpass" name="food" value="">
-                <label for="food">Food Pass</label>
-            </div>
-            <p class="centerItem">20€</p>
-
-
-            <p class="doubleItem">Indem Sie auf Bestellen klicken, stimmen Sie den AGB zu.</p>
-
-            <button class="centerItem doubleItem positive" type="submit">Jetzt Bestellen</button>
-        </form>
-
+  <div class="mainGrid">
+    <div class="pageTitle">
+      <a href="/tickets" class="neutralLink centerItem">
+        <img class="smallImage" src="pictures/pfeil.png" alt="" />
+      </a>
+      <h2 class="centerItem">VIP-Ticket</h2>
     </div>
 
+    <form class="doubleGrid" action="#" method="POST" accept-charset="utf-8">
+      <label for="vname">Vorname</label>
+      <input name="surname" type="text" id="vname" required />
+
+      <label for="nname">Nachname</label>
+      <input name="name" type="text" id="nname" required />
+
+      <label for="email">Email</label>
+      <input name="email" type="text" id="email" required />
+
+      <p class="centerItem">VIP-Ticket</p>
+      <p class="centerItem">100€</p>
+
+      <div class="centerItem">
+        <input
+          class="checkbox"
+          type="checkbox"
+          id="foodpass"
+          name="food"
+          value=""
+        />
+        <label for="food">Food Pass</label>
+      </div>
+      <p class="centerItem">20€</p>
+
+      <p class="doubleItem">
+        Indem Sie auf Bestellen klicken, stimmen Sie den AGB zu.
+      </p>
+
+      <button class="centerItem doubleItem positive" type="submit">
+        Jetzt Bestellen
+      </button>
+    </form>
+  </div>
 </body>
 
 {%endblock%}
