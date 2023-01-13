@@ -176,8 +176,19 @@
         opacity: 0.5;
     }
 
+    .box .ticketImage {
+        inline-size: 90%;
+            opacity: 0.5;
+    }
+
     .box:hover .boxImage {
         transform: scale(1.2, 1.2);
+        transition: all 0.15s ease-in-out;
+        opacity: 1;
+    }
+
+    .box:hover .ticketImage {
+        transform: scale(1.1, 1.1);
         transition: all 0.15s ease-in-out;
         opacity: 1;
     }
@@ -194,6 +205,19 @@
     .ticket {
         font-size: 3vw;
         top: 45%;
+    }
+
+    .smallDescription {
+        font-size: 2vw;
+    }
+
+    .formField {
+        height: 4vh;
+        width: 25vw;
+    }
+
+    .descriptionField {
+        height: 20vh;
     }
 
     .neutralLink {

@@ -124,11 +124,17 @@ const router = async (ctx) => {
   if (url.pathname == "/kollophon") return await controller.kollophon(ctx);
   if (url.pathname == "/lineup") return await controller.lineup(ctx);
   if (url.pathname == "/lineup/add") {
-    if (method == "GET") {
+    if(ctx.session.userId!=undefined){
+      console.log("userId is not undefined");
+      if (method == "GET") {
       return await lineupController.add(ctx);
     }
     if (method == "POST") {
       return await lineupController.submitAdd(ctx);
+    }}
+    else{
+      console.log("userId is undefined");
+      return await controller.index(ctx);
     }
   }
   if (url.pathname == "/tickets") return await controller.tickets(ctx);
@@ -163,11 +169,17 @@ const router = async (ctx) => {
       return await controller.artist(ctx);
     }
     if (method == "POST") {
+      if(ctx.session.userId!=undefined){
       return await lineupController.removeArtist(ctx);
     }
+    else {
+      return await controller.index(ctx);
+    }
   }
-
+  }
+  
   if (url.pathname.match(/\/artist\/([0-9]*)\/edit/)) {
+    if(ctx.session.userId!=undefined){
     const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
     ctx.params.id = matches[1];
     if (method == "GET") {
@@ -177,6 +189,10 @@ const router = async (ctx) => {
       return await lineupController.submitEdit(ctx);
     }
   }
+  else{
+    return await controller.index(ctx);
+  }
+}
   return await controller.error404(ctx);
 };
 

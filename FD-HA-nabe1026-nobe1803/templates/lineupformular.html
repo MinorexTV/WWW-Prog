@@ -32,6 +32,7 @@
       <label for="artistname">Künstername</label>
       <div>
         <input
+          class="formField"
           type="text"
           id="artistname"
           name="artistname"
@@ -44,23 +45,22 @@
       </div>
       <label for="date">Datum</label>
       <div>
-        <input type="date" id="date" name="date" value="{{form.date}}" />
+        <input class="formField" type="date" id="date" name="date" value="{{form.date}}" />
         {% if errors.date %}
         <p class="formError">{{errors.date}}</p>
         {% endif %}
       </div>
       <label for="time">Zeit</label>
       <div>
-        <input type="time" id="time" name="time" value="{{form.time}}" />
+        <input class="formField" type="time" id="time" name="time" value="{{form.time}}" />
         {% if errors.time %}
         <p class="formError">{{errors.time}}</p>
         {% endif %}
       </div>
       <label for="text">Beschreibung</label>
       <div>
-        <textarea id="text" name="text" rows="8" cols="20">
-{{form.description}}</textarea
-        >
+        <textarea class="formField descriptionField" id="text" name="text" rows="8" cols="20">
+        {{form.description}}</textarea>
         {% if errors.text %}
         <p class="formError">{{errors.text}}</p>
         {% endif %}

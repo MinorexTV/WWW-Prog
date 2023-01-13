@@ -35,7 +35,7 @@ export function index(ctx) {
 export function datenschutz(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("datenschutzerklärung.html", {
+  ctx.response.body = ctx.nunjucks.render("datenschutzerklaerung.html", {
     authenticated: auth,
   });
   ctx.response.status = 200;
@@ -80,7 +80,7 @@ export function lineup(ctx) {
   debug("@index. ctx %O", ctx.request.url);
   const allArtists = dbModel.getAllArtists(ctx.data);
   const auth = ctx.session.userId;
-  ctx.response.body = ctx.nunjucks.render("LineUp.html", {
+  ctx.response.body = ctx.nunjucks.render("lineup.html", {
     allArtists,
     authenticated: auth,
   });
@@ -141,7 +141,7 @@ export function d_farben(ctx) {
 
 export function d_erklaerung(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("d_erklärung.html", {});
+  ctx.response.body = ctx.nunjucks.render("d_erklaerung.html", {});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
