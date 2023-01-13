@@ -194,7 +194,7 @@
     }
 
     .title {
-        font-size: 2.5em;
+        font-size: 8vw;
         text-align: center;
         position: absolute;
         top: 40%;
@@ -344,6 +344,10 @@
         .info {
             font-size: 3vw;
         }
+
+        .title {
+            font-size: 4.5vw;
+        }
     }
 
     @media screen and (min-width: 1200px) {
@@ -355,6 +359,10 @@
         .info {
             font-size: 2vw;
         }
+        .title {
+            font-size: 3vw;
+        }
+
     }
 
 
