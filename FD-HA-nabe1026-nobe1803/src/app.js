@@ -9,7 +9,6 @@ import * as lineupController from "./lineup-controller.js";
 import * as loginController from "./login-controller.js";
 import * as ticketController from "./ticket-controller.js";
 
-//in extra modul auslagern
 export const createSessionStore = () => {
   const sessionStore = new Map();
   return {
@@ -37,7 +36,7 @@ nunjucks.configure("templates", { autoescape: true, noCache: true });
 const db = new DB("./data/roadrockdb.db");
 
 const SESSION_KEY = "my_app.session";
-const MAX_AGE = 60 * 60 * 1000 * 2; // one hour *2 because of time zone
+const MAX_AGE = 60 * 60 * 1000 * 2; //* 2(Stunden) wegen europäischer Zeitzone
 const sessionStore = createSessionStore();
 
 export const handleRequest = async (request) => {
@@ -64,8 +63,7 @@ export const handleRequest = async (request) => {
   ctx.session = ctx.sessionStore.get(currentSessionKey) ?? {};
   ctx = await serveStaticFile(base, ctx);
   ctx = await router(ctx);
-  //does ctx.session have an entry? (like ctx.session.userId): if so, set sessionStore with new Id
-  //else destroy sessionstore and session key (logout)
+
   if (Object.values(ctx.session).find(Boolean)) {
     ctx.sessionId = ctx.sessionId ?? createId();
     ctx.sessionStore.set(ctx.sessionId, ctx.session, MAX_AGE);
@@ -81,7 +79,6 @@ export const handleRequest = async (request) => {
   }
   ctx.response.headers = mergeHeaders(ctx.response.headers, ctx.cookies);
 
-  // Fallback
   ctx.response.status = ctx.response.status ?? 404;
   if (!ctx.response.body && ctx.response.status == 404) {
     ctx = await controller.error404(ctx);
@@ -90,7 +87,6 @@ export const handleRequest = async (request) => {
   return new Response(ctx.response.body, {
     status: ctx.response.status,
     headers: ctx.response.headers,
-    //alternative: result.response.headers.get(HEADER)
   });
 };
 
@@ -126,7 +122,6 @@ const router = async (ctx) => {
   if (url.pathname == "/lineup") return await controller.lineup(ctx);
   if (url.pathname == "/lineup/add") {
     if (ctx.session.userId != undefined) {
-      console.log("userId is not undefined");
       if (method == "GET") {
         return await lineupController.add(ctx);
       }
@@ -134,7 +129,6 @@ const router = async (ctx) => {
         return await lineupController.submitAdd(ctx);
       }
     } else {
-      console.log("userId is undefined");
       return await controller.index(ctx);
     }
   }
@@ -220,7 +214,7 @@ const serveStaticFile = async (base, ctx) => {
   const contentType = mediaTypes.contentType(ext);
   if (contentType) {
     ctx.response.status = 200;
-    ctx.response.body = file.readable; // Use readable stream ctx.response.headers["Content-type"] = contentType; ctx.response.status = 200;
+    ctx.response.body = file.readable;
   } else {
     Deno.close(file.rid);
   }

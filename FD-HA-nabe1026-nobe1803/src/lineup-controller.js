@@ -90,7 +90,7 @@ export async function submitEdit(ctx) {
 
 export function removeArtist(ctx) {
   dbModel.removeArtist(ctx.data, ctx.params.id);
-  //ctx.redirect = Response.redirect(new URL("/lineup", ctx.request.url));
+
   ctx.response.status = 303;
   ctx.response.headers.location = new URL("/lineup", ctx.request.url);
   return ctx;

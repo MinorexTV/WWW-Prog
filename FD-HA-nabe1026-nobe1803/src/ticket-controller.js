@@ -44,10 +44,9 @@ export async function tagesticketSubmit(ctx) {
     foodpass: foodpass,
     tickettype: tickettype,
   };
-  console.log("order: ", order);
   dbModel.addOrder(ctx.data, order);
   ctx.response.headers["location"] = "/confirmation";
-  ctx.response.status = 302; // Found
+  ctx.response.status = 302;
   return ctx;
 }
 
@@ -71,10 +70,9 @@ export async function vipticketSubmit(ctx) {
     foodpass: foodpass,
     tickettype: tickettype,
   };
-  console.log("order: ", order);
   dbModel.addOrder(ctx.data, order);
   ctx.response.headers["location"] = "/confirmation";
-  ctx.response.status = 302; // Found
+  ctx.response.status = 302;
   return ctx;
 }
 

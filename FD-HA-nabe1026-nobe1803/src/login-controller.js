@@ -30,7 +30,6 @@ export async function submitForm(ctx) {
   } else {
     if (userExists(ctx.data, enteredUsername)) {
       const user = dbModel.getUser(ctx.data, enteredUsername)[0];
-      console.log(await bcrypt.compare(enteredPassword, user.password));
       if (await bcrypt.compare(enteredPassword, user.password)) {
         user.password_hash = undefined;
         ctx.response.status = 303;
@@ -41,7 +40,7 @@ export async function submitForm(ctx) {
         ctx.response.body = ctx.nunjucks.render("login.html", {
           errors: ctx.errors,
           name: enteredUsername,
-        }); //namen übernehmen
+        });
         ctx.response.status = 200;
 
         ctx.response.headers["content-type"] = "text/html";
@@ -78,6 +77,6 @@ export function logout(ctx) {
   ctx.session.userId = undefined;
   ctx.session.flash = `Du hast dich ausgeloggt.`;
   ctx.response.headers["location"] = "/";
-  ctx.response.status = 302; // Found
+  ctx.response.status = 302;
   return ctx;
 }
