@@ -24,7 +24,14 @@
       <form class="doubleGrid" action="#" method="POST">
         <label for="name">Name:</label>
         <div>
-          <input class="formField" type="text" id="name" name="name" autofocus value="{{name}}" />
+          <input
+            class="formField"
+            type="text"
+            id="name"
+            name="name"
+            autofocus
+            value="{{name}}"
+          />
           {% if errors.name %}
           <p class="formError">{{errors.name}}</p>
           {% endif %} {% if errors.input.name %}
@@ -33,7 +40,13 @@
         </div>
         <label for="password">Password:</label>
         <div>
-          <input class="formField" type="password" id="password" name="password" value="" />
+          <input
+            class="formField"
+            type="password"
+            id="password"
+            name="password"
+            value=""
+          />
           {% if errors.password %}
           <p class="formError">{{errors.password}}</p>
           {% endif %} {% if errors.input.password %}

@@ -81,7 +81,7 @@ export async function submitEdit(ctx) {
     ctx.response.status = 303;
     ctx.response.headers.location = new URL(
       `/artist/${ctx.params.id}`,
-      ctx.request.url
+      ctx.request.url,
     );
   }
 

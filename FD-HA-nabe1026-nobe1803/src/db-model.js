@@ -9,7 +9,7 @@ export const addArtist = (data, newArtistData) =>
     `
     INSERT INTO artists (name, description, time, date, picture) 
     VALUES (:name, :description,:time, :date, :picture);`,
-    newArtistData
+    newArtistData,
   );
 
 export const editArtist = (data, newArtistData) =>
@@ -17,7 +17,7 @@ export const editArtist = (data, newArtistData) =>
     `UPDATE artists
     SET name=:name ,description=:description, time=:time, date=:date
     WHERE artists.artistId=:id`,
-    newArtistData
+    newArtistData,
   );
 
 export const removeArtist = (data, id) =>
@@ -33,5 +33,5 @@ export const addOrder = (data, order) =>
     `
 INSERT INTO orders (name, surname, email, tickettype, foodpass) 
 VALUES (:name, :surname, :email, :tickettype, :foodpass);`,
-    order
+    order,
   );

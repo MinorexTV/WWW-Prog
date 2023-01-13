@@ -118,21 +118,22 @@ const router = async (ctx) => {
   if (url.pathname == "/info") return await controller.info(ctx);
   if (url.pathname == "/datenschutz") return await controller.datenschutz(ctx);
   if (url.pathname == "/formular") return await controller.formular(ctx);
-  if (url.pathname == "/confirmation")
+  if (url.pathname == "/confirmation") {
     return await ticketController.confirmation(ctx);
+  }
   if (url.pathname == "/impressum") return await controller.impressum(ctx);
   if (url.pathname == "/kollophon") return await controller.kollophon(ctx);
   if (url.pathname == "/lineup") return await controller.lineup(ctx);
   if (url.pathname == "/lineup/add") {
-    if(ctx.session.userId!=undefined){
+    if (ctx.session.userId != undefined) {
       console.log("userId is not undefined");
       if (method == "GET") {
-      return await lineupController.add(ctx);
-    }
-    if (method == "POST") {
-      return await lineupController.submitAdd(ctx);
-    }}
-    else{
+        return await lineupController.add(ctx);
+      }
+      if (method == "POST") {
+        return await lineupController.submitAdd(ctx);
+      }
+    } else {
       console.log("userId is undefined");
       return await controller.index(ctx);
     }
@@ -152,16 +153,21 @@ const router = async (ctx) => {
       return await ticketController.vipticketSubmit(ctx);
     }
   }
-  if (url.pathname == "/documentation")
+  if (url.pathname == "/documentation") {
     return await controller.documentation(ctx);
-  if (url.pathname == "/documentation/module")
+  }
+  if (url.pathname == "/documentation/module") {
     return await controller.d_module(ctx);
-  if (url.pathname == "/documentation/farben")
+  }
+  if (url.pathname == "/documentation/farben") {
     return await controller.d_farben(ctx);
-  if (url.pathname == "/documentation/erklaerung")
+  }
+  if (url.pathname == "/documentation/erklaerung") {
     return await controller.d_erklaerung(ctx);
-  if (url.pathname == "/documentation/zeitleiste")
+  }
+  if (url.pathname == "/documentation/zeitleiste") {
     return await controller.d_zeitleiste(ctx);
+  }
   if (url.pathname.match(/\/artist\/([0-9]*)$/)) {
     const matches = url.pathname.match(/\/artist\/([0-9]*)$/);
     ctx.params.id = matches[1];
@@ -169,30 +175,28 @@ const router = async (ctx) => {
       return await controller.artist(ctx);
     }
     if (method == "POST") {
-      if(ctx.session.userId!=undefined){
-      return await lineupController.removeArtist(ctx);
+      if (ctx.session.userId != undefined) {
+        return await lineupController.removeArtist(ctx);
+      } else {
+        return await controller.index(ctx);
+      }
     }
-    else {
+  }
+
+  if (url.pathname.match(/\/artist\/([0-9]*)\/edit/)) {
+    if (ctx.session.userId != undefined) {
+      const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
+      ctx.params.id = matches[1];
+      if (method == "GET") {
+        return await lineupController.edit(ctx);
+      }
+      if (method == "POST") {
+        return await lineupController.submitEdit(ctx);
+      }
+    } else {
       return await controller.index(ctx);
     }
   }
-  }
-  
-  if (url.pathname.match(/\/artist\/([0-9]*)\/edit/)) {
-    if(ctx.session.userId!=undefined){
-    const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
-    ctx.params.id = matches[1];
-    if (method == "GET") {
-      return await lineupController.edit(ctx);
-    }
-    if (method == "POST") {
-      return await lineupController.submitEdit(ctx);
-    }
-  }
-  else{
-    return await controller.index(ctx);
-  }
-}
   return await controller.error404(ctx);
 };
 
