@@ -133,14 +133,14 @@ const router = async (ctx) => {
     }
   }
   if (url.pathname == "/tickets") return await controller.tickets(ctx);
-  if (url.pathname == "/tagesticket") {
+  if (url.pathname == "/tickets/tagesticket") {
     if (method == "GET") {
       return await ticketController.tagesticket(ctx);
     } else {
       return await ticketController.tagesticketSubmit(ctx);
     }
   }
-  if (url.pathname == "/vipticket") {
+  if (url.pathname == "/tickets/vipticket") {
     if (method == "GET") {
       return await ticketController.vipticket(ctx);
     } else {
@@ -177,7 +177,7 @@ const router = async (ctx) => {
     }
   }
 
-  if (url.pathname.match(/\/artist\/([0-9]*)\/edit/)) {
+  if (url.pathname.match(/\/lineup\/artist\/([0-9]*)\/edit/)) {
     if (ctx.session.userId != undefined) {
       const matches = url.pathname.match(/\/artist\/([0-9]*)\/edit/);
       ctx.params.id = matches[1];
