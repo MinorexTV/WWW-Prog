@@ -2,8 +2,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Road Rock - LineUp</title>
-  <meta name="lineup" content="width=device-width, initial-scale=1" />
+  <title>LineUp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="/css/Style.css" type="text/css" rel="stylesheet" />
 </head>
 
@@ -12,7 +12,7 @@
     <div class="navbarTop">
       <a href="/">Home</a>
       <a class="active" href="/lineup">LineUp</a>
-      <a href="/tickets">Tickets & Preise</a>
+      <a href="/tickets">Tickets &amp; Preise</a>
       <a href="/info">Info</a>
       {% if authenticated %}
       <a href="/logout">Logout</a>
@@ -24,7 +24,7 @@
 
   <div class="mainGrid">
     <div class="pageTitle">
-      <img class="centerItem" src="pictures/Logo.png" />
+      <img class="centerItem" src="pictures/Logo.png" alt="RoadRockLogo" />
       <h1>LineUp</h1>
     </div>
 
@@ -32,7 +32,11 @@
       {%for artist in allArtists%}
       <li class="box">
         <a class="neutralLink" href="/artist/{{artist.artistId}}">
-          <img class="boxImage" src="{{artist.picture}}" />
+          <img
+            class="boxImage"
+            src="{{artist.picture}}"
+            alt="{{artist.name}}"
+          />
           <h2 class="title">{{artist.name}}</h2>
         </a>
       </li>
