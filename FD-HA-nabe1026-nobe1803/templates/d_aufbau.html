@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Aufbau</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="/documentation/css/Style.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <div class="navbarTop">
+        <a href="/documentation">Allgemeines</a>
+        <a class="active" href="/documentation/aufbau">Aufbau</a>
+        <a href="/documentation/erklaerung">Erklärung</a>
+        <a href="/documentation/zeitleiste">Zeitleiste</a>
+        <a href="/">RoadRock</a>
+      </div>
+    </nav>
+
+    <div class="mainGrid">
+      <h2>Aufbau der Anwendung</h2>
+      <h3></h3>
+      <p>
+        Der grundlegende Aufbau der Anwendung ist, dass der Server (in app.js)
+        einen Request an die HandleRequest-Funktion übergibt. In der
+        HandleRequest wird das ctx-Objekt angelegt. Dieses wird an
+        serveStaticFile übergeben, um zu überprüfen, ob zusätzliche Daten
+        mitgegeben wurden, sodass diese dann angezeigt werden. Danach wird das
+        ctx-Objekt an den Router übergeben.
+      </p>
+      <p>
+        Der Router leitet das ctx-Objekt abhängig von der URL, den Nutzerrechten
+        und der angegebenen Method des Requests an den jeweiligen Controller
+        weiter. Die Controller geben das entsprechende HTML aus dem
+        Templates-Ordner zurück. Hierfür wird ein Nunjucks.render - Aufruf
+        genutzt. Die HTML-Templates nutzen das CSS aus assets/css für eine
+        einheitliche Darstellung.
+      </p>
+      <h3>URIs</h3>
+      <p>
+        Für die Hauptseiten haben wir einfach /index, /lineup, /info, … als URI
+        angelegt. Unterseiten sind zu finden unter
+      </p>
+      <ul>
+        <li>
+          /linup/artist/artistId, wenn man einen bestimmten Künstler aufruft
+        </li>
+        <li>/artist/artistId/edit, um diesen zu bearbeiten</li>
+        <li>/lineup/add, um das Lineup um einen Eintrag zu erweitern</li>
+        <li>
+          /tickets/tagesticket bzw. /tickets/vipticket für die Ticketbestellung
+        </li>
+      </ul>
+      <h3>Controller</h3>
+      <p>
+        Die veränderbaren Inhaltstypen der Site sind die Künstlerprofile, welche
+        im Lineup angezeigt werden, sowie die Tickets (welche jedoch nur in der
+        Datenbank hinterlegt und nicht auf der Site direkt gezeigt werden).
+      </p>
+      <p>
+        Für jede Seite mit Funktionalität haben wir jeweils einen Controller
+        zusätzlich zu unserem generellen Controller angelegt: den Lineup-,
+        Login- und Ticket-Controller.
+      </p>
+      <p>
+        In allen Controllern sind Funktionen für das Auslesen der jeweiligen
+        Formulardaten vorhanden. Hier werden außerdem die Usereingaben
+        validiert, es wird also überprüft, ob sie vorhanden sind und ob sie eine
+        ausreichende Länge besitzen.
+      </p>
+      <p>
+        Der Login-Controller hat eine Funktion zur Überprüfung, ob der Username
+        mit einem Eintrag der Datenbank übereinstimmt und dann eine Weitere, die
+        mittels bcrypt prüft, ob das eingegebene Passwort mit dem
+        userspezifischen Hash in der Datenbank übereinstimmt. Bei Fehlern wird
+        immer eine bzw. mehrere Fehlermeldungen im ctx.error-Objekt gespeichert
+        und zurückgegeben, die dann der html-Seite übergeben und unter dem
+        jeweiligen Eingabefeld angezeigt wird.
+      </p>
+      <p>
+        Durch zusätzliche Übergabe der in die Eingabefelder eingetragenen Daten
+        bleiben diese in den Feldern stehen, wenn die Seite aufgrund eines
+        Fehlers das Formular nicht abschicken kann und neu geladen wird.
+      </p>
+      <p>
+        Der LineUp-Controller hat unterschiedliche Funktionen für das
+        Hinzufügen, Bearbeiten und Entfernen von Künstlereinträgen.
+      </p>
+      <p>
+        Im Ticket-Controller finden sich weitere Funktionen, um bei jeweiliger
+        Auswahl zwischen VIP- und Tagesticket zu unterscheiden, um bei
+        erfolgreicher Bestellung diese der Datenbank hinzuzufügen und um die
+        Bestätigungsseite anzuzeigen.
+      </p>
+      <p>
+        Diese Aufteilung haben wir so gewählt, um eine bessere Verteilung der
+        Funktionen verschiedener Unterseiten zu erzielen.
+      </p>
+      <h3>Datenbank</h3>
+      <p>
+        Unsere Datenbank enthält entsprechend unserer Controller drei Tabellen,
+        eine für die Künstlerprofile mit Spalten für ID, Name, Beschreibung,
+        Bild, und Auftrittsdatum und -zeit, eine für User mit Spalten Username,
+        Passwort und ID, und eine für Bestellungen (“orders”) mit Spalten für
+        Tickettyp, Userdaten, optionalen Foodpass und ID.
+      </p>
+      <h3>Login</h3>
+      <p>
+        In app.js haben wir eine CookieMap verwendet, um einen SessionKey zu
+        erstellen und diesen mittels des SessionStore zu speichern. Der Cookie
+        beinhaltet den Key, sowie dessen “Lebensdauer” (max age). So wird der
+        User automatisch nach einer bestimmten Zeit (in unserem Fall 60min)
+        ausgeloggt. Die Erstellung des Sessionkey erfolgt über eine Funktion in
+        app.js, sobald eine ID in ctx.session vorhanden ist. Andernfalls werden
+        Session-ID und Session Key zerstört.
+      </p>
+      <p>
+        Durch Abfragen der Session-ID kann in verschiedenen Bereichen der Site
+        festgestellt werden, ob ein User eingeloggt ist. Entsprechend werden
+        bestimmte Buttons sichtbar und das Bearbeiten der Daten ermöglicht.
+      </p>
+      <h3>Potentielle Gefahren</h3>
+      <p>
+        Die Gefahren, welche durch Sicherheitslücken entstehen könnten, sind zum
+        Beispiel, dass sensible Daten der Nutzer veröffentlicht oder verkauft
+        werden könnten, oder dass man an Tickets gerät ohne Durchlaufen des
+        Bezahlvorgangs. Außerdem könnten nicht autorisierte Nutzer das LineUp
+        verändern.
+      </p>
+      <p>
+        Um dem vorzubeugen, haben wir eine Prüfung der Rechte für alle Aufrufe
+        von Seiten, bei denen Daten verändert werden, die nur durch
+        Administratoren aufgerufen werden dürfen. Sollte eine nicht autorisierte
+        Person versuchen, wird sie zurück auf die Startseite geleitet und erhält
+        keine Möglichkeit, mit der Datenbank zu interagieren.
+      </p>
+      <p>
+        Die sensiblen Nutzerdaten werden nach Bestellvorgang der Tickets direkt
+        in der Datenbank gespeichert, auf die kein Zugriff über die Website
+        möglich ist.
+      </p>
+    </div>
+
+    <footer>
+      <div class="doubleItem">
+        <h3>WWW-Programmierung Hausarbeit</h3>
+        <p>Wintersemester 2022/23</p>
+      </div>
+      <div>
+        <h3>Nathalie Beiter</h3>
+        <p>Matrikelnummer: 690711</p>
+        <p>Login: nabe1026</p>
+      </div>
+      <div>
+        <h3>Nouri Ben Naji</h3>
+        <p>Matrikelnummer: 690738</p>
+        <p>Login: nobe1803</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -14,33 +14,35 @@
   <body>
     <nav>
       <div class="navbarTop">
-        <a href="/documentation">Gestaltung</a>
-        <a href="/documentation/module">Module</a>
-        <a href="/documentation/farben">Farben</a>
+        <a href="/documentation">Allgemeines</a>
+        <a href="/documentation/aufbau">Aufbau</a>
         <a href="/documentation/erklaerung">Erklärung</a>
         <a class="active" href="/documentation/zeitleiste">Zeitleiste</a>
+        <a href="/">RoadRock</a>
       </div>
     </nav>
 
     <div class="mainGrid">
       <h2>Zeitleiste</h2>
       <ul class="Zeitleiste">
-
-
         <li>
           <h3>13.12. - Serverfunktionalität mit Router</h3>
-          <p>Als Startpunkt haben wir unser Projekt für die Website aus Frontend-Design genommen. 
-            Wir haben einen Server angelegt sowie einen Router, der für bestimmte URLs das entsprechende 
-            HTML rendert. Die hrefs wurden dafür ebenfalls angepasst.
+          <p>
+            Als Startpunkt haben wir unser Projekt für die Website aus
+            Frontend-Design genommen. Wir haben einen Server angelegt sowie
+            einen Router, der für bestimmte URLs das entsprechende HTML rendert.
+            Die hrefs wurden dafür ebenfalls angepasst.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl1.png" alt="" />
           </figure>
         </li>
 
-         <li>
+        <li>
           <h3>15.12. - Datenbank</h3>
-          <p>Dann haben wir eine Datenbank angelegt und dort eine Tabelle für die Künstlerdaten erstellt.
+          <p>
+            Dann haben wir eine Datenbank angelegt und dort eine Tabelle für die
+            Künstlerdaten erstellt.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl2.png" alt="" />
@@ -49,45 +51,55 @@
 
         <li>
           <h3>18.12. - Templates</h3>
-          <p>Wir haben ein HTML-Template “Layout” erstellt, welches durch andere Seiten erweitert werden kann. 
-            Dieses beinhaltet bereits den Footer und nutzt unser CSS.
+          <p>
+            Wir haben ein HTML-Template “Layout” erstellt, welches durch andere
+            Seiten erweitert werden kann. Dieses beinhaltet bereits den Footer
+            und nutzt unser CSS.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl3.png" alt="" />
           </figure>
         </li>
 
-         <li>
+        <li>
           <h3>28.12. - SQL und Login</h3>
-          <p>Alle SQL-Aufrufe haben wir in ein separates DB-Model ausgelagert und injection-sicher 
-            definiert mit Platzhaltern. Außerdem haben wir eine grobe Login-Funktionalität 
-            implementiert, indem wir eine Loginseite hinzufügten und eine Usertabelle in der Datenbank anlegten.
+          <p>
+            Alle SQL-Aufrufe haben wir in ein separates DB-Model ausgelagert und
+            injection-sicher definiert mit Platzhaltern. Außerdem haben wir eine
+            grobe Login-Funktionalität implementiert, indem wir eine Loginseite
+            hinzufügten und eine Usertabelle in der Datenbank anlegten.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl4.png" alt="" />
           </figure>
         </li>
 
-         <li>
+        <li>
           <h3>10.01. - Login</h3>
-          <p>Die Login-Funktionalität wurde erweitert, indem wir zusätzlich mit bcrypt das 
-            eingegebene Passwort gehasht haben. Im Login-Controller haben wir die Logik für 
-            das Abgleichen der Eingaben mit den Datenbankeinträgen und das Validieren des 
-            Passworts hinzugefügt. In der Datenbank haben wir dann Passwörter nur noch als 
-            Hashes gespeichert. Die Login-Funktionalität in app.js wurde wie oben beschrieben implementiert.
+          <p>
+            Die Login-Funktionalität wurde erweitert, indem wir zusätzlich mit
+            bcrypt das eingegebene Passwort gehasht haben. Im Login-Controller
+            haben wir die Logik für das Abgleichen der Eingaben mit den
+            Datenbankeinträgen und das Validieren des Passworts hinzugefügt. In
+            der Datenbank haben wir dann Passwörter nur noch als Hashes
+            gespeichert. Die Login-Funktionalität in app.js wurde wie oben
+            beschrieben implementiert.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl5.png" alt="" />
           </figure>
         </li>
 
-         <li>
+        <li>
           <h3>11.01. - Errors anzeigen</h3>
-          <p>Um das Login zu vervollständigen, haben wir eine Logout-Seite mit entsprechendem 
-            Button hinzugefügt und jedes html und übergebene Daten angepasst, damit in der navbar - 
-            je nach Loginstatus - oben “Login” oder “Logout” steht und man zu der jeweiligen Seite gelangt.
-            Außerdem haben wir alle potentiellen Fehlermeldungen bei den Formularen in die jeweiligen 
-            HTML-Seiten eingebaut und an diese Objekte übergeben, die die Fehler beinhalten.
+          <p>
+            Um das Login zu vervollständigen, haben wir eine Logout-Seite mit
+            entsprechendem Button hinzugefügt und jedes html und übergebene
+            Daten angepasst, damit in der navbar - je nach Loginstatus - oben
+            “Login” oder “Logout” steht und man zu der jeweiligen Seite gelangt.
+            Außerdem haben wir alle potentiellen Fehlermeldungen bei den
+            Formularen in die jeweiligen HTML-Seiten eingebaut und an diese
+            Objekte übergeben, die die Fehler beinhalten.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl6.png" alt="" />
@@ -96,9 +108,11 @@
 
         <li>
           <h3>12.01. - Zusätzliche Sicherheit</h3>
-          <p>Um zu vermeiden, dass man durch manuelle Eingabe der URL auf Seiten mit Zugriff auf 
-            die Datenbank gelangen kann, haben wir Abfragen in den Router integriert, welche dies 
-            verhindern und den nicht eingeloggten Nutzer zurück auf die Startseite weiterleiten.
+          <p>
+            Um zu vermeiden, dass man durch manuelle Eingabe der URL auf Seiten
+            mit Zugriff auf die Datenbank gelangen kann, haben wir Abfragen in
+            den Router integriert, welche dies verhindern und den nicht
+            eingeloggten Nutzer zurück auf die Startseite weiterleiten.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl7.png" alt="" />
@@ -107,8 +121,9 @@
 
         <li>
           <h3>13.01. - Codeformatierung</h3>
-          <p>Zum Schluss haben wir unseren Code aufgeräumt und richtig formatiert und kleine 
-            Änderungen an der Darstellung vorgenommen.
+          <p>
+            Zum Schluss haben wir unseren Code aufgeräumt und richtig formatiert
+            und kleine Änderungen an der Darstellung vorgenommen.
           </p>
           <figure>
             <img src="/documentation/pictures/Zeitstrahl8.png" alt="" />
@@ -116,10 +131,13 @@
         </li>
       </ul>
 
-      <p>Über den gesamten Zeitraum der Erstellung der Site wurden wir immer wieder mit 
-            weiteren kleinen Problemen konfrontiert und haben dafür verschiedene Lösungen gefunden. 
-            Dokumentiert haben wir die wichtigsten Änderungen.
+      <p>
+        Über den gesamten Zeitraum der Erstellung der Site wurden wir immer
+        wieder mit weiteren kleinen Problemen konfrontiert und haben dafür
+        verschiedene Lösungen gefunden. Dokumentiert haben wir die wichtigsten
+        Änderungen.
       </p>
+    </div>
 
     <footer>
       <div class="doubleItem">

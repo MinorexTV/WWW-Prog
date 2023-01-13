@@ -150,11 +150,8 @@ const router = async (ctx) => {
   if (url.pathname == "/documentation") {
     return await controller.documentation(ctx);
   }
-  if (url.pathname == "/documentation/module") {
-    return await controller.d_module(ctx);
-  }
-  if (url.pathname == "/documentation/farben") {
-    return await controller.d_farben(ctx);
+  if (url.pathname == "/documentation/aufbau") {
+    return await controller.d_aufbau(ctx);
   }
   if (url.pathname == "/documentation/erklaerung") {
     return await controller.d_erklaerung(ctx);

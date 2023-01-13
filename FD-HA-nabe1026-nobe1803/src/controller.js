@@ -123,21 +123,14 @@ export function documentation(ctx) {
   return ctx;
 }
 
-export function d_module(ctx) {
+export function d_aufbau(ctx) {
   debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("d_module.html", {});
+  ctx.response.body = ctx.nunjucks.render("d_aufbau.html", {});
   ctx.response.status = 200;
   ctx.response.headers["content-type"] = "text/html";
   return ctx;
 }
 
-export function d_farben(ctx) {
-  debug("@index. ctx %O", ctx.request.url);
-  ctx.response.body = ctx.nunjucks.render("d_farben.html", {});
-  ctx.response.status = 200;
-  ctx.response.headers["content-type"] = "text/html";
-  return ctx;
-}
 
 export function d_erklaerung(ctx) {
   debug("@index. ctx %O", ctx.request.url);
