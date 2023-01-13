@@ -43,6 +43,7 @@ export async function submitForm(ctx) {
           name: enteredUsername,
         }); //namen übernehmen
         ctx.response.status = 200;
+
         ctx.response.headers["content-type"] = "text/html";
       }
     } else {
