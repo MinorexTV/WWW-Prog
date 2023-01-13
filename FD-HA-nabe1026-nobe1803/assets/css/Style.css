@@ -348,6 +348,10 @@
         .title {
             font-size: 4.5vw;
         }
+
+        .ticket {
+            font-size: 1.2vw;
+        }
     }
 
     @media screen and (min-width: 1200px) {
@@ -359,8 +363,13 @@
         .info {
             font-size: 2vw;
         }
+        
         .title {
             font-size: 3vw;
+        }
+
+        .ticket {
+            font-size: 1vw;
         }
 
     }
